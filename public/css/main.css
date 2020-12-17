@@ -152,7 +152,7 @@ iframe {
   color: #333333;
   line-height: 1.2;
   text-align: center;
-  padding-bottom: 90px;
+  padding-bottom: 50px;
 }
 
 
@@ -183,6 +183,7 @@ iframe {
   top: 0;
   left: 0;
   pointer-events: none;
+  text-align: left;
 }
 
 .focus-input2::before {
@@ -379,7 +380,6 @@ textarea.input2 + .focus-input2::after {
 
 .alert-validate::after {
   content: "\f12a";
-  font-family: FontAwesome;
   display: block;
   position: absolute;
   color: #c80000;

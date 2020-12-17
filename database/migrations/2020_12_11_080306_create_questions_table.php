@@ -15,7 +15,6 @@ class CreateQuestionsTable extends Migration {
 			$table->id();
 			$table->foreignId('quiz_id')->index()->default(DB::getPdo()->lastInsertId());
 			$table->string('question');
-			//$table->foreignId('answer_id')->index();
 		});
 	}
 

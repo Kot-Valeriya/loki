@@ -22,7 +22,7 @@
                     </span>
                 </span>
                 {!!__('welcomePage.block1')!!}
-                <a class="button button-style1" href="#">
+                <a class="button button-style1" href="{{route('quizzes.index')}}">
                     {{__('buttons.popIn')}}
                 </a>
             </section>
@@ -32,7 +32,7 @@
                     </span>
                 </span>
                 {!!__('welcomePage.block2')!!}
-                <a class="button button-style1" href="/quizzes/create">
+                <a class="button button-style1" href="{{route('quizzes.create')}}">
                     {{__('buttons.create')}}
                 </a>
             </section>

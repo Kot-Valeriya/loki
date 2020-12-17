@@ -2,14 +2,32 @@
   <div class="bg-contact2" style="background-image: url('/images/bg-01.jpg');">
     <div class="container-contact2">
       <div class="wrap-contact2">
-        <form method="POST" class="contact2-form validate-form"  action="/quizzes">
+        <form method="POST" class="contact2-form validate-form"  action="{{ route('quizzes.store')}}">
           @csrf
 
           <span class="contact2-form-title">
-            {{ $quiz->title }}
-            <p> Remains to enter {{$remainingQuestions }} questions
+            New quiz
           </span>
 
+          <div class="wrap-input2 validate-input alert validate" data-validate="Title is required">
+            <input class="input2" type="text" name="title">
+            <span class="focus-input2
+            {{ $errors->has('title')? 'danger' : '' }}"
+            data-placeholder="{{ $errors->has('title')? $errors->first('title'): 'TITLE'}}"
+            value=" {{old('title')}} "></span>
+          </div>
+
+          <div class="wrap-input2 validate-input" data-validate = "Description is required">
+            <textarea class="input2" name="description"></textarea>
+            <span class="focus-input2   {{ $errors->has('description')? 'danger' : '' }}" data-placeholder="{{ $errors->has('description')? $errors->first('description'): 'DESCRIPTION' }}"
+              value="{{old('description')}}"></span>
+          </div>
+
+            <div class="wrap-input2 validate-input" data-validate="Number is required">
+            <input class="input2" type="text" name="number_of_questions" >
+            <span class="focus-input2  {{ $errors->has('number_of_questions')? 'danger' : '' }}" data-placeholder="{{ $errors->has('number_of_questions')? $errors->first('number_of_questions'): 'NUMBER OF QUESTIONS' }}
+              " value="{{old('number_of_questions')}}"></span>
+            </div>
 
             <div class="wrap-input2 validate-input" data-validate="Question is required">
             <input class="input2" type="text" name="question" >
@@ -44,7 +62,7 @@
               <div class="contact2-form-bgbtn"></div>
 
               <button type="submit" class="contact2-form-btn" style="background: url(/images/right-arrow.png) no-repeat right center;">
-               Brainstorm is created!
+               New Question!
               </button>
             </div>
           </div>

@@ -17,7 +17,7 @@ class QuizController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		//
+		return view('quizzes.index', ['quizzes' => \DB::table('quizzes')->simplePaginate(9)]);
 	}
 
 	/**
@@ -26,15 +26,15 @@ class QuizController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create() {
-		return view('quizzes.create', ['quizzes' => $this->get_latest(4), 'partial' => View::'partials.create-quiz-form')]);
+		return view('quizzes.create', ['partial' => 'quizzes.partials.create-quiz-form']);
 	}
 
 	/**
-	 * Get latest entered quizzes.
+	 * Get latest entered quizzes. Used by ViewComposer
 	 *
 	 * @return App\Models\Quiz
 	 */
-	public function get_latest(int $number) {
+	public static function get_latest(int $number) {
 		return Quiz::take($number)->latest()->get();
 	}
 
@@ -42,14 +42,13 @@ class QuizController extends Controller {
 	 * Store a newly created resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
+	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(CreateQuizRequest $request) {
 
-		$remainingQuestions = 0;
-
-		if ($remainingQuestions === 0) {
-			//\DB::beginTransaction();
+		if (!isset($remainingQuestions)) {
+			\DB::beginTransaction();
 			$quiz = Quiz::create([
 				'title' => request('title'),
 				'description' => request('description'),
@@ -66,9 +65,14 @@ class QuizController extends Controller {
 		while ($remainingQuestions > 0) {
 			$this->createNewQuestion($request, $quiz, $remainingQuestions);
 			$remainingQuestions--;
-			return view('quizzes.newQuestion-form', ['quizzes' => $this->get_latest(4), 'quiz' => $quiz, 'remainingQuestions' => $remainingQuestions, 'partial' => view('partials.create-form')]);
+
+			return view('quizzes.create', [
+				'quiz' => $quiz,
+				'remainingQuestions' => $remainingQuestions,
+				'partial' => 'quizzes.partials.create-question-form']);
 		}
-		return redirect('/');
+		\DB::commit();
+		return 'success';
 
 	}
 
@@ -79,7 +83,10 @@ class QuizController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show(Quiz $quiz) {
-		//
+
+		$quiz->load('questions.answers');
+
+		return view('quizzes.show', compact('quiz'));
 	}
 
 	/**

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,17 +14,33 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::post('/quizzes', 'QuizController@store');
 
-Route::get('/quizzes/create', 'QuizController@create');
+Route::resource('quizzes', 'QuizController');
 
-Route::get('about', function () {
+Route::get('/quizzes/{quiz}', 'QuizController@show');
+Route::middleware('auth')->group(function () {
+
+	Route::get('quizzes/{quizId}/questions/create', function () {
+		return redirect()->action('QuestionController@create')->with(['quiz' => $quiz,
+			'remainingQuestions' => $remainingQuestions]);})
+		->name('quizzes.questions.create');
+	Route::post('quizzes/{quizId}/questions', 'QuizController@store')
+		->name('quizzes.questions.store');
+
+	Route::get('quizzes/{quiz}/edit', 'QuizController@edit');
+	Route::put('quizzes/{quiz}', 'QuizController@update');
+
+	Route::get('quizzes/create', 'QuizController@create')
+		->name('quizzes.create');
+
+});
+Route::post('quizzes', 'QuizController@store')
+	->name('quizzes.store');
+Route::get('quizzes', 'QuizController@index')->name('quizzes.index');
+
+Route::get('/about', function () {
 	return view('about');
 });
-Route::get('/quizzes/{id}/edit', 'QuizController@edit');
-Route::put('/quizzes/{quiz}', 'QuizController@update');
-
-Route::get('/quizzes/{id}/questions/create', 'Controller@create')->name('new-question');
 
 Route::get('/lang/{locale}', 'HomeController@lang')->name('language.set');
 

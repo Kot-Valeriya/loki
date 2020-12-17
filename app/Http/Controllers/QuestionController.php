@@ -21,7 +21,10 @@ class QuestionController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create() {
-		//
+		return view('quizzes.create', [
+			'quiz' => $quiz,
+			'remainingQuestions' => $remainingQuestions,
+			'partial' => 'quizzes.partials.create-question-form']);
 	}
 
 	/**

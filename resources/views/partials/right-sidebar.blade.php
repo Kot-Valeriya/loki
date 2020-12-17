@@ -7,7 +7,7 @@
             </h2>
         </header>
         <ul class="style">
-            @foreach($quizzes as $quiz)
+            @foreach($newQuizzes as $quiz)
             <li>
                 <p class="posted">
                     {{$quiz->title}} |  {{$quiz->updated_at}}

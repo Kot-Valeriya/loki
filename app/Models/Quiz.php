@@ -12,6 +12,10 @@ class Quiz extends Model {
 	protected $fillable = ['title', 'description', 'number_of_questions'];
 	protected $guarded = ['user_id'];
 
+	public function getRouteKeyName() {
+		return 'id';
+	}
+
 	public function questions() {
 		return $this->hasMany(Question::class);
 	}

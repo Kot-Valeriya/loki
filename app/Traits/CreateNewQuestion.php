@@ -19,21 +19,21 @@ trait CreateNewQuestion {
 			//'quiz_id'=>$quiz->id
 		]);
 		$quiz->questions()->save($question);
-
-		for ($i = 0; $i <= 8; $i++) {
-			//dd($request);
-			if ($i !== 0 && null !== $request->input('rightAnswer' . $i)) {break;}
+		//dd($request);
+		for ($i = 1; $i <= 8; $i++) {
+			//dd($request->input('rightAnswer'));
+			if (!$request->has('rightAnswer' . $i)) {continue;}
 			$answer = Answer::create([
-				'answer' => $i !== 0 ? request('rightAnswer' . $i) : request('rightAnswer'),
+				'answer' => request('rightAnswer' . $i),
 			]);
 			$answer->is_correct = true;
 			$question->answers()->save($answer);
 		}
 
-		for ($i = 0; $i <= 8; $i++) {
-			if ($i !== 0 && null !== $request->input('wrongAnswer' . $i)) {break;}
+		for ($i = 1; $i <= 8; $i++) {
+			if (!$request->has('wrongAnswer' . $i)) {continue;}
 			$answer = Answer::create([
-				'answer' => $i !== 0 ? request('wrongAnswer' . $i) : request('wrongAnswer'),
+				'answer' => request('wrongAnswer' . $i),
 			]);
 			$answer->is_correct = false;
 			$question->answers()->save($answer);
