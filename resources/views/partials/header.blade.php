@@ -55,13 +55,13 @@
                     </div>
                 </li>
                 @endguest
-                <li class="{{Request::path()===''? 'active':''}}">
-                    <a href="right-sidebar.html">
+                <li class="{{Request::path()==='quizzes'? 'active':''}}">
+                    <a href="/quizzes">
                         {{__('buttons.header3')}}
                     </a>
                 </li>
-                <li class="{{Request::path()===''? 'active':''}}">
-                    <a href="/">
+                <li class="{{Request::path()==='leaderboard'? 'active':''}}">
+                    <a href="/leaderboard">
                         {{__('buttons.header4')}}
                     </a>
                 </li>

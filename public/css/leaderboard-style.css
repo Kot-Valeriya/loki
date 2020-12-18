@@ -1,0 +1,108 @@
+
+span.yellow{
+  font-size:2em; 
+  font-weight: 300;
+  line-height:1em;
+  text-align: center;
+}
+
+h3.leaderboard{
+  font-size:1.5em; 
+  font-weight: 300;
+  text-align: center;
+  display: block;
+  line-height:1em;
+  padding-bottom: 2em;
+  color: #b35900;
+}
+
+a.leaderboard  {
+  font-weight: 500;
+  text-transform: uppercase;
+  color:  #ff8000;
+  text-decoration: none;
+}
+
+
+.yellow { color: #ffb366; }
+
+.board-container th h1 {
+    font-weight: bold;
+    font-size: 1em;
+  text-align: left;
+  color: #b35900;
+}
+
+.board-container td {
+    font-weight: normal;
+    font-size: 1em;
+  -webkit-box-shadow: 0 2px 2px -2px #804000;
+     -moz-box-shadow: 0 2px 2px -2px #804000;
+          box-shadow: 0 2px 2px -2px #804000;
+}
+
+.board-container {
+    text-align: left;
+    overflow: hidden;
+    width: 80%;
+    margin: 0 auto;
+  display: table;
+  padding: 0 0 8em 0;
+}
+
+.board-container td, .board-container th {
+    padding-bottom: 2%;
+    padding-top: 2%;
+  padding-left:2%;  
+}
+
+/* Background-color of the odd rows */
+.board-container tr:nth-child(odd) {
+    background-color: rgb(255, 153, 51,0.1);
+}
+
+/* Background-color of the even rows */
+.board-container tr:nth-child(even) {
+    background-color: rgb(255, 153, 51,0.2);
+}
+
+.board-container th {
+    background-color: #ffbf80;
+}
+
+.board-container td:first-child { color: #cc6600; }
+
+.board-container tr:hover {
+   background-color: rgb(204, 102, 0,0.3);
+-webkit-box-shadow: 0 6px 6px -6px #0E1119;
+     -moz-box-shadow: 0 6px 6px -6px #0E1119;
+          box-shadow: 0 6px 6px -6px #0E1119;
+}
+
+.board-container td:hover {
+  background-color:rgb(255, 191, 128,0.8);
+  color: #663300;
+  font-weight: bold;
+  
+  box-shadow: #c68c53 -1px 1px, #c68c53 -2px 2px, #c68c53 -3px 3px, #c68c53 -4px 4px, #c68c53 -5px 5px, #c68c53 -6px 6px;
+  transform: translate3d(6px, -6px, 0);
+  
+  transition-delay: 0s;
+    transition-duration: 0.4s;
+    transition-property: all;
+  transition-timing-function: line;
+}
+
+@media (max-width: 800px) {
+.board-container td:nth-child(4),
+.board-container th:nth-child(4) { display: none; }
+}
+
+div.award-image-wrap img{
+   display: block;
+  text-align: center;
+  width: 35px;
+}
+
+
+

@@ -18,6 +18,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::resource('quizzes', 'QuizController');
 
 Route::get('/quizzes/{quiz}', 'QuizController@show');
+Route::post('/quizzes/{quiz}/result', 'HandleResultController');
 Route::middleware('auth')->group(function () {
 
 	Route::get('quizzes/{quizId}/questions/create', function () {
@@ -36,11 +37,13 @@ Route::middleware('auth')->group(function () {
 });
 Route::post('quizzes', 'QuizController@store')
 	->name('quizzes.store');
-Route::get('quizzes', 'QuizController@index')->name('quizzes.index');
+Route::get('/quizzes', 'QuizController@index')->name('quizzes.index');
 
 Route::get('/about', function () {
 	return view('about');
 });
+
+Route::get('/leaderboard', 'UserController@index')->name('leaderboard');
 
 Route::get('/lang/{locale}', 'HomeController@lang')->name('language.set');
 

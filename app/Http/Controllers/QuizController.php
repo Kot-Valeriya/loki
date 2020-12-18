@@ -30,15 +30,6 @@ class QuizController extends Controller {
 	}
 
 	/**
-	 * Get latest entered quizzes. Used by ViewComposer
-	 *
-	 * @return App\Models\Quiz
-	 */
-	public static function get_latest(int $number) {
-		return Quiz::take($number)->latest()->get();
-	}
-
-	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request

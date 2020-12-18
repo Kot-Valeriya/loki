@@ -20,8 +20,34 @@ class Quiz extends Model {
 		return $this->hasMany(Question::class);
 	}
 
+	public function answers() {
+		return $this->hasManyThrough(Answer::class, Question::class);
+	}
+
 	public function author() {
 		return $this->belongsTo(User::class, 'user_id');
+	}
+
+	public function solve($answers) {
+		$score = 0;
+
+		foreach ($answers as $answer) {
+
+			if ($answer) {
+				$score++;
+			}
+		}
+		return $score;
+
+	}
+
+	/**
+	 * Get latest entered quizzes. Used by ViewComposer
+	 *
+	 * @return App\Models\Quiz
+	 */
+	public static function get_latest(int $number) {
+		return self::take($number)->latest()->get();
 	}
 
 	protected $casts = [

@@ -58,7 +58,8 @@
 
 @section('body')
 <body class="homepage">
-    @endsection
+@endsection
+
 @section('content')
     <div id="content">
         <div class="row">
@@ -96,8 +97,8 @@
             @endforeach
         </div>
     </div>
-    @endsection
+ @endsection
 
-	@section('tweet')
-	@include('partials.tweet')
-	@endsection
+@section('tweet')
+@include('partials.tweet')
+@endsection
