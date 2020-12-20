@@ -2,9 +2,6 @@
 
 @section('title','Loki-Create your own quiz')
 @section('head')
-<link rel="stylesheet" href="{{ asset('css/skel-noscript.css')}}" />
-<link rel="stylesheet" href="{{ asset('css/style.css')}}" />
- <link rel="stylesheet" href="{{ asset('css/style-desktop.css')}}" />
   <link rel="stylesheet" type="text/css" href="{{ asset('css/util.css') }}"/>
   <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
 @endsection
@@ -19,10 +16,17 @@
               <header>
                 <h2>Time to create something amazing !</h2>
                 <span class="byline">Create an awesome quiz in minutes</span>
+
+                 <div class="bg-contact2" style="background-image: url('/images/bg-01.jpg');">
+                 <div class="container-contact2">
+                 <div class="wrap-contact2">
                 @include($partial, [
                   'quiz'=> $quiz?? '',
                   'remainingQuestions' => $remainingQuestions?? ''
                   ])
+                </div>
+              </div>
+            </div>
               </header>
             </section>
           </div>

@@ -20,10 +20,9 @@
         <div class="bg-contact2" style="background-image: url('images/bg-01.jpg');">
             <div class="container-contact2">
                 <div class="wrap-contact2">
-                    <form action="{{ route('login') }}" class="contact2-form validate-form" method="POST">
-                        @csrf
-                            @yield('content-form')
-                    </form>
+
+                @yield('content-form')
+
                 </div>
             </div>
         </div>

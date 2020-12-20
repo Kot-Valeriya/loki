@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateQuizRequest;
 use App\Models\Quiz;
+use App\models\User;
 use App\Traits\CreateNewQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,15 @@ class QuizController extends Controller {
 	 */
 	public function index() {
 		return view('quizzes.index', ['quizzes' => \DB::table('quizzes')->simplePaginate(9)]);
+	}
+	/**
+	 * Display a listing of the quizzes filtered by specified user id.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function list(int $id) {
+
+		return view('quizzes.index', ['quizzes' => Quiz::where('user_id', $id)->simplePaginate(9)]);
 	}
 
 	/**
@@ -87,7 +97,12 @@ class QuizController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit(Quiz $quiz) {
-		//
+		$quiz->load('questions.answers');
+
+		return view('quizzes.create', [
+			'quiz' => $quiz,
+			'remainingQuestions' => $quiz->number_of_questions,
+			'partial' => 'quizzes.partials.edit-quiz-form']);
 	}
 
 	/**
@@ -98,7 +113,7 @@ class QuizController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update(Request $request, Quiz $quiz) {
-		return redirect();
+		return 'HERE!';
 	}
 
 	/**

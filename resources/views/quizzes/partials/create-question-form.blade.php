@@ -1,7 +1,4 @@
 
-  <div class="bg-contact2" style="background-image: url('/images/bg-01.jpg');">
-    <div class="container-contact2">
-      <div class="wrap-contact2">
         <form method="POST" class="contact2-form validate-form"  action="{{ route('quizzes.store') }}">
            @csrf
           <br/>
@@ -57,9 +54,6 @@
             </div>
           </div>
         </form>
-      </div>
-    </div>
-  </div>
 
 
 

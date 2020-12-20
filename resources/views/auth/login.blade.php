@@ -1,9 +1,12 @@
 @extends('auth.partials.form')
 @section('content-form')
 
+ <form action="{{ route('login') }}" class="contact2-form validate-form" method="POST">
+                        @csrf
 <span class="contact2-form-title">
     {{ __('Login') }}
 </span>
+
 <div class="wrap-input2 validate-input" data-validate="Valid email is required: ex@abc.xyz">
     <input autocomplete="email" autofocus="" class="input2 form-control @error('email') is-invalid @enderror" id="email" name="email" required="" type="email" value="{{ old('email') }}">
         <span class="focus-input2" data-placeholder="  {{ __('E-Mail Address') }}">
@@ -59,4 +62,5 @@
     {{ __('Forgot Your Password?') }}
 </a>
 @endif
+</form>
 @endsection

@@ -1,6 +1,3 @@
-<div class="bg-contact2" style="background-image: url('/images/bg-01.jpg');">
-    <div class="container-contact2">
-        <div class="wrap-contact2">
             <form action="/quizzes/{{$quiz->id}}/result" class="contact2-form validate-form" method="POST">
                 @csrf
                 <br/>
@@ -33,6 +30,3 @@
               </div>
           </div>
             </form>
-        </div>
-    </div>
-</div>

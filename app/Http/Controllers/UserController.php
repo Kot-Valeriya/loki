@@ -41,7 +41,8 @@ class UserController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show(User $user) {
-		//
+		$user->load('quizzes');
+		return view('profile', compact('user'));
 	}
 
 	/**

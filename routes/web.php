@@ -28,11 +28,13 @@ Route::middleware('auth')->group(function () {
 	Route::post('quizzes/{quizId}/questions', 'QuizController@store')
 		->name('quizzes.questions.store');
 
-	Route::get('quizzes/{quiz}/edit', 'QuizController@edit');
+	Route::get('/quizzes/{quiz}/edit', 'QuizController@edit');
 	Route::put('quizzes/{quiz}', 'QuizController@update');
 
 	Route::get('quizzes/create', 'QuizController@create')
 		->name('quizzes.create');
+
+	Route::patch('/quizzes/{quiz}', 'QuizController@update')->name('quizzes.update');
 
 });
 Route::post('quizzes', 'QuizController@store')
@@ -42,6 +44,9 @@ Route::get('/quizzes', 'QuizController@index')->name('quizzes.index');
 Route::get('/about', function () {
 	return view('about');
 });
+
+Route::get('/users/{user}', 'UserController@show')->name('users.show');
+Route::get('/users/{user}/quizzes', 'QuizController@list')->name('users.quizzes');
 
 Route::get('/leaderboard', 'UserController@index')->name('leaderboard');
 

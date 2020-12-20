@@ -9,10 +9,11 @@
                         {{__('buttons.header1')}}
                     </a>
                 </li>
+
                 <!-- Authentication Links -->
                 @guest
                     @if (Route::has('login'))
-                <li class="{{Request::path()===''? 'active':''}}">
+                <li class="{{Request::path()==='login'? 'active':''}}">
                     <a class="nav-link" href="{{ route('login') }}">
                         {{ __('Login') }}
                     </a>
@@ -20,21 +21,22 @@
                 @endif
 
                     @if (Route::has('register'))
-                <li class="{{Request::path()===''? 'active':''}}">
+                <li class="{{Request::path()==='register'? 'active':''}}">
                     <a class="nav-link" href="{{ route('register') }}">
                         {{ __('Register') }}
                     </a>
                 </li>
                 @endif
 
+
                 @else
-                <li class="{{Request::path()===''? 'active':''}}">
+                <li class="{{Request::segment(1)==='users'? 'active':''}}">
+                     <a  class="nav-link" href="{{route('users.show',['user'=>Auth::user()->id])}}">
+                                    {{__('buttons.header2')}}
+                        </a>
                     <div class="sl-nav">
                         <ul>
                             <li class="nav-item dropdown">
-                                <span>
-                                    {{__('buttons.header2')}}
-                                </span>
                                 <i aria-hidden="true" class="fa fa-angle-down"></i>
                                 <div class="triangle"> </div>
                                 <ul>

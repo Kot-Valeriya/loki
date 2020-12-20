@@ -2,18 +2,22 @@
 
 @section('title','Loki-Quizzes')
 
-
-
 @section('body')
 <body>
     @endsection
 @section('content')
     <div class="row">
+
         <div class="container" id="content">
             <header class="header">
-            <h2>Choose your quiz !</h2>
-        </header>
-            <div>
+                @if(Request::segment(3)==='quizzes')
+                <h2>Click to edit selected quiz
+                 </h2>
+                @else
+                 <h2>Choose your quiz !</h2>
+            @endif
+            </header>
+        <div>
 
                 @foreach($quizzes as $quiz)
 
@@ -25,13 +29,19 @@
                 @endif
                 <section class="4u">
                     <a class="image full" href="#">
-                        <img alt="Rubik's cube picture" src="images/default-display-quizzes/quiz{{$loop->iteration}}.jpg"/>
+                        <img alt="Rubik's cube picture" src="{{asset('images/default-display-quizzes/quiz'.$loop->iteration.'.jpg')}}"/>
                     </a>
                     <header>
                         <h2>
-                            <a href="/quizzes/{{$quiz->id}}">
+                            @if(Request::segment(3)==='quizzes')
+                            <a href="/quizzes/{{$quiz->id}}/edit">
                             {{ $quiz->title }}
                         </a>
+                        @else
+                         <a href="/quizzes/{{$quiz->id}}">
+                            {{ $quiz->title }}
+                        </a>
+                        @endif
                         </h2>
                     </header>
                     <p>
