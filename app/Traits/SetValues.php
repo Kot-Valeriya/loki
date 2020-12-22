@@ -7,7 +7,7 @@ use App\Models\Question;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
 
-trait CreateNewQuestion {
+trait SetValues {
 	/*
 		* Store created new question in database with attached answers
 		* Return void
@@ -37,6 +37,40 @@ trait CreateNewQuestion {
 			]);
 			$answer->is_correct = false;
 			$question->answers()->save($answer);
+		}
+	}
+
+	public function editQuiz(Request $request, Quiz $quiz) {
+
+		$i = 1;
+		foreach ($quiz->questions as $question) {
+			$k = 1;
+			$question->update([
+				'question' => request('question' . $i),
+			]);
+
+			foreach ($question->answers as $answer) {
+
+				if ($request->has('rightAnswer' . $i . '_' . $k)) {
+
+					$answer->update([
+						'answer' =>
+						request('rightAnswer' . $i . '_' . $k),
+
+					]);
+					$k++;
+				} elseif ($request->has('wrongAnswer' . $i . '_' . $k)) {
+
+					$answer->update([
+						'answer' =>
+						request('wrongAnswer' . $i . '_' . $k),
+
+					]);
+					$k++;
+				}
+			}
+
+			$i++;
 		}
 	}
 }

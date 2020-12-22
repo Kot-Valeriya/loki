@@ -24,5 +24,9 @@ class AppServiceProvider extends ServiceProvider {
 				'partials.no-sidebar'],
 			\App\Http\ViewComposers\NewQuizzesComposer::class);
 
+		\Blade::if ('ifFromEdit', function () {
+			return \Str::contains(\URL::previous(), 'edit');
+		});
+
 	}
 }

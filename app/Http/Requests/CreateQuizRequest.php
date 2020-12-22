@@ -23,7 +23,7 @@ class CreateQuizRequest extends FormRequest {
 		return [
 			'title' => 'required|min:4|max:50',
 			'description' => 'required|min:15|max:600',
-			'number_of_questions' => 'required|integer',
+			'number_of_questions' => 'required|numeric|min:2|max:40',
 			'question' => 'required|min:15|max:250',
 			'rightAnswer' => 'required|max:100',
 			'wrongAnswer' => 'required|max:100',

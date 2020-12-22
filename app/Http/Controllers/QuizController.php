@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateQuizRequest;
 use App\Models\Quiz;
 use App\models\User;
-use App\Traits\CreateNewQuestion;
+use App\Traits\SetValues;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class QuizController extends Controller {
 
-	use CreateNewQuestion;
+	use SetValues;
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -36,7 +36,7 @@ class QuizController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create() {
-		return view('quizzes.create', ['partial' => 'quizzes.partials.create-quiz-form']);
+		return view('quizzes.form', ['partial' => 'quizzes.partials.create-quiz-form']);
 	}
 
 	/**
@@ -64,10 +64,10 @@ class QuizController extends Controller {
 		}
 
 		while ($remainingQuestions > 0) {
-			$this->createNewQuestion($request, $quiz, $remainingQuestions);
+			$this->createNewQuestion($request, $quiz);
 			$remainingQuestions--;
 
-			return view('quizzes.create', [
+			return view('quizzes.form', [
 				'quiz' => $quiz,
 				'remainingQuestions' => $remainingQuestions,
 				'partial' => 'quizzes.partials.create-question-form']);
@@ -99,7 +99,7 @@ class QuizController extends Controller {
 	public function edit(Quiz $quiz) {
 		$quiz->load('questions.answers');
 
-		return view('quizzes.create', [
+		return view('quizzes.form', [
 			'quiz' => $quiz,
 			'remainingQuestions' => $quiz->number_of_questions,
 			'partial' => 'quizzes.partials.edit-quiz-form']);
@@ -113,7 +113,32 @@ class QuizController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update(Request $request, Quiz $quiz) {
-		return 'HERE!';
+
+		if ($request->input('sbmt-btn') === "create") {
+			\DB::beginTransaction();
+
+			$quiz->update($request->all());
+			$this->editQuiz($request, $quiz);
+
+			return view('quizzes.form', [
+				'quiz' => $quiz,
+				'remainingQuestions' => 0,
+				'partial' => 'quizzes.partials.create-question-form']);
+
+		} elseif ($request->input('sbmt-btn') === "add") {
+			$this->createNewQuestion($request, $quiz);
+
+			return redirect()->route('quizzes.edit', ['quiz' => $quiz]);
+
+		} elseif ($request->input('sbmt-btn') === "save") {
+			if (\DB::transactionLevel() == 0) {
+				\DB::beginTransaction();
+			}
+
+			$quiz->update($request->all());
+			$this->editQuiz($request, $quiz);
+			\DB::commit();
+		}
 	}
 
 	/**

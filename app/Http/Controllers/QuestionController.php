@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\Quiz;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller {
@@ -21,7 +22,7 @@ class QuestionController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create() {
-		return view('quizzes.create', [
+		return view('quizzes.form', [
 			'quiz' => $quiz,
 			'remainingQuestions' => $remainingQuestions,
 			'partial' => 'quizzes.partials.create-question-form']);
@@ -53,8 +54,11 @@ class QuestionController extends Controller {
 	 * @param  \App\Models\Question  $question
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit(Question $question) {
-		//
+	public function edit(Question $question, Quiz $quiz) {
+		return view('quizzes.form', [
+			'quiz' => $quiz,
+			'question' => $question,
+			'partial' => 'quizzes.partials.edit-question-form']);
 	}
 
 	/**

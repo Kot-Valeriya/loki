@@ -20,6 +20,7 @@ Route::resource('quizzes', 'QuizController');
 Route::get('/quizzes/{quiz}', 'QuizController@show');
 Route::post('/quizzes/{quiz}/result', 'HandleResultController');
 Route::middleware('auth')->group(function () {
+	Route::patch('/quizzes/{quiz}', 'QuizController@update')->name('quizzes.update');
 
 	Route::get('quizzes/{quizId}/questions/create', function () {
 		return redirect()->action('QuestionController@create')->with(['quiz' => $quiz,
@@ -28,13 +29,18 @@ Route::middleware('auth')->group(function () {
 	Route::post('quizzes/{quizId}/questions', 'QuizController@store')
 		->name('quizzes.questions.store');
 
-	Route::get('/quizzes/{quiz}/edit', 'QuizController@edit');
+	Route::get('/quizzes/{quiz}/edit', 'QuizController@edit')->name('quizzes.edit');
 	Route::put('quizzes/{quiz}', 'QuizController@update');
 
 	Route::get('quizzes/create', 'QuizController@create')
 		->name('quizzes.create');
 
-	Route::patch('/quizzes/{quiz}', 'QuizController@update')->name('quizzes.update');
+	Route::get('/questions/{question}/edit', 'QuestionController@edit')->name('questions.edit');
+	Route::patch('/questions/{question}', 'QuestionController@update')->name('questions.update');
+
+	Route::delete('/answers/{answer}', 'AnswerController@destroy')->name('answers.destroy');
+	Route::delete('/questions/{question}', 'QuestionController@destroy')->name('questions.destroy');
+	Route::delete('/quizzes/{quizz}', 'QuizController@destroy')->name('quizzes.destroy');
 
 });
 Route::post('quizzes', 'QuizController@store')
