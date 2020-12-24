@@ -18,7 +18,8 @@ class QuizController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		return view('quizzes.index', ['quizzes' => \DB::table('quizzes')->simplePaginate(9)]);
+		return view('quizzes.index',
+			['quizzes' => Quiz::latest()->simplePaginate(9)]);
 	}
 	/**
 	 * Display a listing of the quizzes filtered by specified user id.
@@ -27,7 +28,8 @@ class QuizController extends Controller {
 	 */
 	public function list(int $id) {
 
-		return view('quizzes.index', ['quizzes' => Quiz::where('user_id', $id)->simplePaginate(9)]);
+		return view('quizzes.index',
+			['quizzes' => Quiz::where('user_id', $id)->simplePaginate(9)]);
 	}
 
 	/**
@@ -36,7 +38,8 @@ class QuizController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create() {
-		return view('quizzes.form', ['partial' => 'quizzes.partials.create-quiz-form']);
+		return view('quizzes.form',
+			['partial' => 'quizzes.partials.create-quiz-form']);
 	}
 
 	/**
@@ -48,8 +51,10 @@ class QuizController extends Controller {
 	 */
 	public function store(CreateQuizRequest $request) {
 
-		if (!isset($remainingQuestions)) {
-			\DB::beginTransaction();
+		if (!$request->session()->exists('remainingQuestions')) {
+
+			//\DB::beginTransaction();
+
 			$quiz = Quiz::create([
 				'title' => request('title'),
 				'description' => request('description'),
@@ -60,20 +65,18 @@ class QuizController extends Controller {
 			$user = Auth::user();
 			$user->quizzes()->save($quiz);
 
-			$remainingQuestions = request('number_of_questions');
-		}
-
-		while ($remainingQuestions > 0) {
 			$this->createNewQuestion($request, $quiz);
-			$remainingQuestions--;
 
-			return view('quizzes.form', [
-				'quiz' => $quiz,
-				'remainingQuestions' => $remainingQuestions,
-				'partial' => 'quizzes.partials.create-question-form']);
+			session(['remainingQuestions' => (request('number_of_questions') - 1)]);
+			session(['quiz' => $quiz]);
+
 		}
-		\DB::commit();
-		return 'success';
+
+		if (request()->session()->get('remainingQuestions') > 0) {
+			return redirect()
+				->route('quizzes.questions.create',
+					['quiz' => request()->session()->get('quiz')->id]);
+		}
 
 	}
 
@@ -87,7 +90,11 @@ class QuizController extends Controller {
 
 		$quiz->load('questions.answers');
 
-		return view('quizzes.show', compact('quiz'));
+		return view('quizzes.form',
+			[
+				'quiz' => $quiz,
+				'partial' => 'quizzes.partials.show-quiz-form',
+			]);
 	}
 
 	/**
@@ -128,7 +135,8 @@ class QuizController extends Controller {
 		} elseif ($request->input('sbmt-btn') === "add") {
 			$this->createNewQuestion($request, $quiz);
 
-			return redirect()->route('quizzes.edit', ['quiz' => $quiz]);
+			return redirect()
+				->route('quizzes.edit', ['quiz' => $quiz]);
 
 		} elseif ($request->input('sbmt-btn') === "save") {
 			if (\DB::transactionLevel() == 0) {
@@ -148,6 +156,11 @@ class QuizController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy(Quiz $quiz) {
-		//
+		$userId = $quiz->user_id;
+		$quiz->delete();
+
+		return redirect()->
+			route('users.show', ['user' => $userId])->
+			with('message', 'Your quiz is successfully deleted');
 	}
 }

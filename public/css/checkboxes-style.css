@@ -4,6 +4,14 @@
   padding: 50px;
 }
 
+input[type="checkbox"] + label.correct {
+  color:limegreen;
+}
+
+
+input[type="checkbox"] + label.correct:before {
+  border: 1px solid limegreen;
+}
 /*Checkboxes styles*/
 input[type="checkbox"] { display: none; }
 

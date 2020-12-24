@@ -25,7 +25,11 @@ class AppServiceProvider extends ServiceProvider {
 			\App\Http\ViewComposers\NewQuizzesComposer::class);
 
 		\Blade::if ('ifFromEdit', function () {
-			return \Str::contains(\URL::previous(), 'edit');
+			return app('router')->getRoutes()->match(app('request')->create(\URL::previous()))->getName() == 'quizzes.edit';
+		});
+
+		\Blade::if ('ifIsCorrect', function ($answer) {
+			return $answer->is_correct;
 		});
 
 	}

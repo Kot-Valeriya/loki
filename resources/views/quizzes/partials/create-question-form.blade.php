@@ -1,14 +1,18 @@
- <form method="POST" class="contact2-form validate-form"
+
+<form class="contact2-form validate-form"
     action="
     @ifFromEdit
-    /quizzes/{{$quiz->id}}
+    {{route('quizzes.edit',['quiz'=>$quiz->id]) }}
     @else
-      {{route('quizzes.store') }}
+      {{route('quizzes.questions.store',['quiz'=>$quiz->id]) }}
     @endif
-          ">
+      " method="POST" >
     @ifFromEdit
     @method('PATCH')
+    @else
+    @method('POST')
     @endif
+
     @csrf
      <br/>
 
@@ -18,13 +22,13 @@
                <p> New question
               </p>
               @else
-                 <p> Remains to enter {{$remainingQuestions }} questions
+                 <p> Remains to enter {{request()->session()->get('remainingQuestions') }} questions
               </p>
               @endif
           </span>
 
             <div class="wrap-input2 validate-input" data-validate="Question is required">
-            <input class="input2" type="text" name="question" >
+            <input class="input2" type="text" name="question" value="{{old('question')}}">
             <span class="focus-input2 {{ $errors->has('question')? 'danger' : '' }}" data-placeholder="{{ $errors->has('question')? $errors->first('question'): 'QUESTION' }}"
              ></span>
           </div>
@@ -32,7 +36,7 @@
 
            <div class="wrap-input2 validate-input" data-validate="Correct answer is required">
             <input type="submit"  style="float:right" class="add-button" id="addCorrAnswer" value=" + ">
-            <input class="input2" type="text" name="rightAnswer" >
+            <input class="input2" type="text" name="rightAnswer" value="{{old('rightAnswer')}}">
             <span class="focus-input2  {{ $errors->has('rightAnswer')? 'danger' : '' }}" data-placeholder="{{ $errors->has('rightAnswer')? $errors->first('rightAnswer'): 'CORRECT ANSWER' }}"
               ></span>
           </div>
@@ -42,7 +46,7 @@
 
           <div class="wrap-input2 validate-input" data-validate="Answer is required">
             <input type="submit"  style="float:right" class="add-button" id="addWrnAnswer" value=" + ">
-            <input class="input2" type="text" name="wrongAnswer" >
+            <input class="input2" type="text" name="wrongAnswer" value="{{old('wrongAnswer')}}">
             <span class="focus-input2  {{ $errors->has('wrongAnswer')? 'danger' : '' }}" data-placeholder="{{ $errors->has('wrongAnswer')? $errors->first('wrongAnswer'): 'WRONG ANSWER' }}"
               ></span>
           </div>
@@ -55,14 +59,13 @@
             <div class="wrap-contact2-form-btn">
               <div class="contact2-form-bgbtn"></div>
 
-              <button name="sbmt-btn" value="add" type="submit" class="contact2-form-btn" style="background: url(/images/right-arrow.png) no-repeat right center;">
+              <button name="sbmt-btn" value="add" type="submit" class="contact2-form-btn" style="background: url(/images/right-arrow.png) no-repeat right center;" >
 
-               @if($remainingQuestions===0)
+               @if({{request()->session()->get('remainingQuestions') }}===0)
                Brainstorm is created!
                @else
                Next Question!
                @endif
-
       </button>
     </div>
   </div>

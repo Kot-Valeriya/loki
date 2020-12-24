@@ -5,6 +5,10 @@ countWrongAnswers=0;
 
 $(document).ready(function(){
     window.console && console.log('Document ready called');
+     form='';
+        if (window.location.href.indexOf("edit") > -1) {
+            form='form="edit"';
+        }
 
     var max_answers = 8;
     $('#addWrnAnswer').click(function(event){
@@ -21,7 +25,7 @@ $(document).ready(function(){
              <div class="wrap-input2 validate-input " data-validate="Answer is required">\
             <input type="submit"  style="float:right" class="add-button" id="addWrnAnswer" value=" - "  \
             onclick="$(\'#positionWrongAnswer'+countWrongAnswers+'\').remove();return false;">\
-            <input class="input2" type="text" name="wrongAnswer'+countWrongAnswers+'">\
+            <input class="input2" type="text" name="wrongAnswer'+countWrongAnswers+'" '+form+'>\
             <span class="focus-input2" data-placeholder="WRONG ANSWER"></span>\
           </div>\
           ');
@@ -42,7 +46,7 @@ $(document).ready(function(){
              <div class="wrap-input2 validate-input" data-validate="Correct answer is required" ">\
             <input type="submit"  style="float:right" class="add-button" id="addWrnAnswer" value=" - "  \
             onclick="$(\'#positionRightAnswer'+countRightAnswers+'\').remove();return false;">\
-            <input class="input2" type="text" name="rightAnswer'+countRightAnswers+'">\
+            <input class="input2" type="text" name="rightAnswer'+countRightAnswers+'" '+form+'>\
             <span class="focus-input2" data-placeholder="CORRECT ANSWER"></span>\
           </div>\
           ');

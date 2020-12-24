@@ -30,6 +30,15 @@ class HomeController extends Controller {
 	}
 
 	/*
+		    *Show application index page.
+		    *
+		    *@return view with latest added quiz objects
+	*/
+	public function about() {
+		return view('about');
+	}
+
+	/*
 		    *Create a new controller instance.
 		    *@return void
 	*/

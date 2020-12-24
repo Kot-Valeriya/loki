@@ -1,10 +1,12 @@
 @extends('layouts.mainLayout')
 
 @section('title','Loki-Create your own quiz')
+
 @section('head')
   <link rel="stylesheet" type="text/css" href="{{ asset('css/util.css') }}"/>
   <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css?v=').time() }}"/>
-  <script src="{{asset('js/create-new-question.js')}}"></script>
+  <script src="{{asset('js/create-new-question.js?v=').time()}}"></script>
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/checkboxes-style.css?v=').time() }}"/>
 
 @endsection
 
@@ -16,9 +18,14 @@
           <div id="content" class="8u skel-cell-important">
             <section>
               <header>
+
                 @if(Request::segment(3)==="edit")
                 <h2>Edit your quiz</h2>
                 <span class="byline">You may update any data in your quiz in minutes here !</span>
+
+                @elseif(Route::currentRouteName()==="quizzes.show")
+                <h2>Time to get your brains out of neutral !</h2>
+                <span class="byline">{{$quiz->description}}</span>
 
                 @else
                 <h2>Time to create something amazing !</h2>
@@ -33,6 +40,7 @@
                   'quiz'=> $quiz?? '',
                   'remainingQuestions' => $remainingQuestions?? '',
                   'question'=>$question ?? '',
+                  'score'=>$score ?? '',
                   ])
                 </div>
               </div>

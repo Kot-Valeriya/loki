@@ -3,6 +3,13 @@
         @csrf
     <br/>
 
+    @if(session()->has('message'))
+       <div class="success-msg">
+       <i class="fa fa-check"></i>
+       {{ session()->get('message') }}
+    </div>
+    @endif
+
     <div class="wrap-input2 validate-input alert validate" data-validate="Title is required">
          <br/>
         <input class="input2" name="title" type="text" value="{{$quiz->title}}">
@@ -31,7 +38,7 @@
     <br/>
 
     <div class="edit-btn">
-    <a href="/" class="toggle-btn" data-tooltip="Edit question"></a>
+    <a href="{{route('questions.edit', ['question'=>$question])}}" class="toggle-btn" data-tooltip="Edit question"></a>
     </div>
 
 
@@ -73,6 +80,7 @@
     <div class="wrap-contact2-form-btn">
         <div class="contact2-form-bgbtn">
         </div>
+
         <button class="contact2-form-btn" name="sbmt-btn"  value="save" type="submit">
         <span>
             Done !
@@ -80,7 +88,9 @@
         </button>
 
         <button class="contact2-form-btn" type="submit" name="sbmt-btn" value="create">
-            <span>Add new question !</span>
+            <span>
+            Add new question !
+           </span>
         </button>
     </div>
 </div>

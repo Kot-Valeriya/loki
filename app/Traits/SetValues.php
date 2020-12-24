@@ -16,61 +16,88 @@ trait SetValues {
 	public function createNewQuestion(Request $request, Quiz $quiz) {
 		$question = Question::create([
 			'question' => request('question'),
-			//'quiz_id'=>$quiz->id
 		]);
 		$quiz->questions()->save($question);
-		//dd($request);
-		for ($i = 1; $i <= 8; $i++) {
-			//dd($request->input('rightAnswer'));
-			if (!$request->has('rightAnswer' . $i)) {continue;}
-			$answer = Answer::create([
-				'answer' => request('rightAnswer' . $i),
-			]);
-			$answer->is_correct = true;
-			$question->answers()->save($answer);
-		}
 
-		for ($i = 1; $i <= 8; $i++) {
-			if (!$request->has('wrongAnswer' . $i)) {continue;}
-			$answer = Answer::create([
-				'answer' => request('wrongAnswer' . $i),
-			]);
-			$answer->is_correct = false;
-			$question->answers()->save($answer);
-		}
+		$this->setAnswers($request, $question);
 	}
 
 	public function editQuiz(Request $request, Quiz $quiz) {
 
-		$i = 1;
+		$counter = 1;
 		foreach ($quiz->questions as $question) {
-			$k = 1;
+
 			$question->update([
-				'question' => request('question' . $i),
+				'question' => request('question' . $counter),
 			]);
 
-			foreach ($question->answers as $answer) {
+			$this->updateAnswers($request, $question, $counter . '_', 'rightAnswer', 'wrongAnswer');
 
-				if ($request->has('rightAnswer' . $i . '_' . $k)) {
-
-					$answer->update([
-						'answer' =>
-						request('rightAnswer' . $i . '_' . $k),
-
-					]);
-					$k++;
-				} elseif ($request->has('wrongAnswer' . $i . '_' . $k)) {
-
-					$answer->update([
-						'answer' =>
-						request('wrongAnswer' . $i . '_' . $k),
-
-					]);
-					$k++;
-				}
-			}
-
-			$i++;
+			$counter++;
 		}
 	}
+
+	public function updateQuestion(Request $request, Question $question) {
+		$this->updateAnswers($request, $question, 'existRightAnswer', 'existWrongAnswer');
+		$this->setAnswers($request, $question);
+	}
+
+	private function setAnswers(Request $request, Question $question) {
+
+		$answerRght = Answer::create([
+			'answer' => request('rightAnswer'),
+		]);
+		$answerRght->is_correct = true;
+		$question->answers()->save($answerRght);
+
+		$answerWr = Answer::create([
+			'answer' => request('wrongAnswer'),
+		]);
+		$answerWr->is_correct = false;
+		$question->answers()->save($answerWr);
+
+		for ($i = 1; $i <= 8; $i++) {
+
+			if ($request->has('rightAnswer' . $i)) {
+				$answer = Answer::create([
+					'answer' => request('rightAnswer' . $i),
+				]);
+				$answer->is_correct = true;
+				$question->answers()->save($answer);
+			}
+			if ($request->has('wrongAnswer' . $i)) {
+
+				$answer = Answer::create([
+					'answer' => request('wrongAnswer' . $i),
+				]);
+				$answer->is_correct = false;
+				$question->answers()->save($answer);
+			}
+		}
+	}
+
+	private function updateAnswers(Request $request, Question $question, string $fieldName1, string $fieldName2, $counter = '_') {
+		$k = 1;
+
+		foreach ($question->answers as $answer) {
+
+			if ($request->has($fieldName1 . $counter . $k)) {
+				$answer->update([
+					'answer' =>
+					request($fieldName1 . $counter . $k),
+					'is_correct' => true,
+				]);
+				$k++;
+			} elseif ($request->has($fieldName2 . $counter . $k)) {
+				$answer->update([
+					'answer' =>
+					request($fieldName2 . $counter . $k),
+					'is_correct' => false,
+
+				]);
+				$k++;
+			}
+		}
+	}
+
 }

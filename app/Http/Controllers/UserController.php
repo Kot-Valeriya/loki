@@ -52,7 +52,7 @@ class UserController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit(User $user) {
-		//
+		return view('auth.edit-profile', compact('user'));
 	}
 
 	/**
@@ -63,7 +63,10 @@ class UserController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update(Request $request, User $user) {
-		//
+		$user->update($request->only('name', 'email'));
+		return redirect()->
+			route('users.show', ['user' => $user->id])->
+			with('message', 'Your profile is successfully updated');
 	}
 
 	/**

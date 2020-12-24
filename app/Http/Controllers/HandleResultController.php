@@ -20,8 +20,13 @@ class HandleResultController extends Controller {
 		if (Auth::check()) {
 			$user = Auth::user();
 			$user->score += $score;
-			dd($user);
+
 		}
 
+		return view('quizzes.form',
+			['partial' => 'quizzes.partials.result',
+				'score' => $score,
+				'quiz' => $quiz,
+			]);
 	}
 }

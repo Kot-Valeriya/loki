@@ -13,7 +13,11 @@ class CreateAnswersTable extends Migration {
 	public function up() {
 		Schema::create('answers', function (Blueprint $table) {
 			$table->id();
-			$table->foreignId('question_id')->index()->default(DB::getPdo()->lastInsertId());
+			$table->foreignId('question_id')
+
+				->onDelete('cascade')
+				->index()
+				->default(DB::getPdo()->lastInsertId());
 			$table->string('answer');
 			$table->boolean('is_correct')->default(false);
 		});

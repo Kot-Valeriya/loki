@@ -13,50 +13,65 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', 'HomeController@index')->name('home');
-
 Route::resource('quizzes', 'QuizController');
+Route::resource('questions', 'QuestionController', [
+	'only' => [
+		'create',
+		'edit',
+		'update',
+		'destroy',
+	],
+]);
 
-Route::get('/quizzes/{quiz}', 'QuizController@show');
-Route::post('/quizzes/{quiz}/result', 'HandleResultController');
 Route::middleware('auth')->group(function () {
-	Route::patch('/quizzes/{quiz}', 'QuizController@update')->name('quizzes.update');
 
-	Route::get('quizzes/{quizId}/questions/create', function () {
-		return redirect()->action('QuestionController@create')->with(['quiz' => $quiz,
-			'remainingQuestions' => $remainingQuestions]);})
-		->name('quizzes.questions.create');
-	Route::post('quizzes/{quizId}/questions', 'QuizController@store')
-		->name('quizzes.questions.store');
-
-	Route::get('/quizzes/{quiz}/edit', 'QuizController@edit')->name('quizzes.edit');
-	Route::put('quizzes/{quiz}', 'QuizController@update');
-
-	Route::get('quizzes/create', 'QuizController@create')
+	Route::get('/quizzes/create', 'QuizController@create')
 		->name('quizzes.create');
+	Route::post('/quizzes', 'QuizController@store')
+		->name('quizzes.store');
+
+	Route::get('/quizzes/{quiz}/edit', 'QuizController@edit')
+		->name('quizzes.edit');
+	Route::patch('/quizzes/{quiz}', 'QuizController@update')
+		->name('quizzes.update');
+
+	Route::post('/quizzes/{quiz}/result', 'HandleResultController');
+
+	Route::delete('/quizzes/{quiz}', 'QuizController@destroy')->name('quizzes.destroy');
+
+	Route::get('/quizzes/{quiz}/questions/create', 'QuestionController@create')
+		->name('quizzes.questions.create');
+	Route::post('/quizzes/{quiz}/questions', 'QuestionController@store')
+		->name('quizzes.questions.store');
+	//Route::post('/quizzes/{quiz}/questions', 'QuizController@store')
+	//->name('quizzes.questions.store');
 
 	Route::get('/questions/{question}/edit', 'QuestionController@edit')->name('questions.edit');
 	Route::patch('/questions/{question}', 'QuestionController@update')->name('questions.update');
 
-	Route::delete('/answers/{answer}', 'AnswerController@destroy')->name('answers.destroy');
 	Route::delete('/questions/{question}', 'QuestionController@destroy')->name('questions.destroy');
-	Route::delete('/quizzes/{quizz}', 'QuizController@destroy')->name('quizzes.destroy');
+
+	Route::delete('/answers/{answer}', 'AnswerController@destroy')->name('answers.destroy');
+
+	Route::get('/users/{user}/edit', 'UserController@edit')
+		->name('users.edit');
+	Route::patch('/users/{user}', 'UserController@update')
+		->name('users.update');
 
 });
-Route::post('quizzes', 'QuizController@store')
-	->name('quizzes.store');
+
 Route::get('/quizzes', 'QuizController@index')->name('quizzes.index');
 
-Route::get('/about', function () {
-	return view('about');
-});
+Route::get('/leaderboard', 'UserController@index')
+	->name('leaderboard');
+Route::get('/users/{user}', 'UserController@show')
+	->name('users.show');
+Route::get('/users/{user}/quizzes', 'QuizController@list')
+	->name('users.quizzes');
 
-Route::get('/users/{user}', 'UserController@show')->name('users.show');
-Route::get('/users/{user}/quizzes', 'QuizController@list')->name('users.quizzes');
-
-Route::get('/leaderboard', 'UserController@index')->name('leaderboard');
-
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/lang/{locale}', 'HomeController@lang')->name('language.set');
+Route::get('/about', 'HomeController@about')->name('about');
 
 Auth::routes();
 

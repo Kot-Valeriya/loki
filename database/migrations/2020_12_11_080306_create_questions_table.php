@@ -13,7 +13,13 @@ class CreateQuestionsTable extends Migration {
 	public function up() {
 		Schema::create('questions', function (Blueprint $table) {
 			$table->id();
-			$table->foreignId('quiz_id')->index()->default(DB::getPdo()->lastInsertId());
+			$table
+				->foreignId('quiz_id')
+
+				->onDelete('cascade')
+				->index()
+				->default(DB::getPdo()
+						->lastInsertId());
 			$table->string('question');
 		});
 	}

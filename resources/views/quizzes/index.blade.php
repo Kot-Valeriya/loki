@@ -28,7 +28,8 @@
             <div class="row">
                 @endif
                 <section class="4u">
-                    <a class="image full" href="#">
+                    <a class="image full"
+                    href="{{route('quizzes.show',['quiz'=>$quiz->id])}}">
                         <img alt="Rubik's cube picture" src="{{asset('images/default-display-quizzes/quiz'.$loop->iteration.'.jpg')}}"/>
                     </a>
                     <header>
@@ -38,7 +39,7 @@
                             {{ $quiz->title }}
                         </a>
                         @else
-                         <a href="/quizzes/{{$quiz->id}}">
+                         <a href="{{route('quizzes.show',['quiz'=>$quiz->id])}}">
                             {{ $quiz->title }}
                         </a>
                         @endif

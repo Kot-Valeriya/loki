@@ -65,12 +65,14 @@
         <div class="row">
             @foreach($quizzes as $quiz)
             <section class="6u">
-                <a class="image full" href="#">
+                <a class="image full" href="{{route('quizzes.show',['quiz'=>$quiz])}}">
                     <img alt="" src="images/welcome{{$loop->index}}.jpg"/>
                 </a>
                 <header>
                     <h2>
+                        <a href="{{route('quizzes.show',['quiz'=>$quiz])}}">
                         {{ $quiz->title }}
+                        </a>
                     </h2>
                 </header>
                 <p>
@@ -82,12 +84,14 @@
         <div class="row">
             @foreach($quizzes1 as $quiz)
             <section class="6u">
-                <a class="image full" href="#">
+                <a class="image full" href="{{route('quizzes.show',['quiz'=>$quiz])}}">
                     <img alt="" src="images/welcome1{{$loop->index}}.jpg"/>
                 </a>
                 <header>
                     <h2>
+                        <a href="{{route('quizzes.show',['quiz'=>$quiz])}}">
                         {{ $quiz->title }}
+                        </a>
                     </h2>
                 </header>
                 <p>

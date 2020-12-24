@@ -3,6 +3,9 @@
                 <br/>
                 <span class="contact2-form-title">
                     {{ $quiz->title }}
+                    <p>
+                      Author : {{$quiz->author->name}}
+                    </p>
                 </span>
 
                 @foreach($quiz->questions as $question)
@@ -12,7 +15,10 @@
 
                   @foreach($question->answers as $answer)
 
-                    <input type="checkbox" id="box-{{$loop->parent->iteration}}{{$loop->iteration}}" name="answers[]" value={{$answer->is_correct}}>
+                    <input type="checkbox" id="box-{{$loop->parent->iteration}}{{$loop->iteration}}" name="answers[]" value="{{$answer->is_correct}}"
+                    @if(old('answers'.$loop->iteration, 0) == 1 || request()->session()->get('answers'.$loop->iteration)==1)
+                    checked
+                     @endif>
 
                         <label for="box-{{$loop->parent->iteration}}{{$loop->iteration}}">
                             {{$answer->answer}}

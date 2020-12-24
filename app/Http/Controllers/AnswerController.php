@@ -13,7 +13,6 @@ class AnswerController extends Controller {
 	 */
 	public function destroy(Answer $answer) {
 		$answer->delete();
-		echo 'here';
-		return redirect()->back();
+		return redirect()->back()->with('answerDeleted', 'Your answer is deleted');
 	}
 }

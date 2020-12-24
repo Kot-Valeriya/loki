@@ -424,6 +424,14 @@ textarea.input2 + .focus-input2::after {
    background: rgb(255, 179, 102, 0.2);
 }
 
+.success-msg {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 3px 3px 3px 3px;
+   color: #270;
+  background-color: #DFF2BF;
+}
+
 .edit-btn {
   position: absolute;
   z-index: 2;
