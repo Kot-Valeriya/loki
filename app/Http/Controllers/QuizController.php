@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateQuizRequest;
 use App\Models\Quiz;
 use App\models\User;
 use App\Traits\SetValues;
@@ -49,7 +48,7 @@ class QuizController extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store(CreateQuizRequest $request) {
+	public function store(QuizRequest $request) {
 
 		if (!$request->session()->exists('remainingQuestions')) {
 
@@ -119,7 +118,7 @@ class QuizController extends Controller {
 	 * @param  \App\Models\Quiz  $quiz
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, Quiz $quiz) {
+	public function update(QuizRequest $request, Quiz $quiz) {
 
 		if ($request->input('sbmt-btn') === "create") {
 			\DB::beginTransaction();
@@ -148,7 +147,21 @@ class QuizController extends Controller {
 			\DB::commit();
 		}
 	}
+	/**
+	 * Restore the specified resource from storage.
+	 *
+	 * @param  \App\Models\Quiz  $quiz
+	 * @return \Illuminate\Http\Response
+	 */
+	public function restore(Quiz $quiz) {
 
+		$quiz->restore();
+		//dd($quiz);
+
+		return redirect()->
+			back()->
+			with('message', 'Your quiz is successfully restored!');
+	}
 	/**
 	 * Remove the specified resource from storage.
 	 *
@@ -160,7 +173,24 @@ class QuizController extends Controller {
 		$quiz->delete();
 
 		return redirect()->
-			route('users.show', ['user' => $userId])->
-			with('message', 'Your quiz is successfully deleted');
+			route('users.show', $userId)->
+			with('message', 'Your quiz is successfully deleted.');
+	}
+	/**
+	 * Permanently remove the specified resource from storage.
+	 *
+	 * @param  \App\Models\Quiz  $quiz
+	 * @return \Illuminate\Http\Response
+	 */
+	public function delete(Quiz $quiz) {
+
+		$userId = $quiz->user_id;
+
+		$quiz->forceDelete();
+		//dd($quiz);
+
+		return redirect()->
+			back()->
+			with('message', 'Your quiz is successfully  permanently deleted.');
 	}
 }

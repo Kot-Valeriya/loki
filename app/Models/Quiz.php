@@ -12,6 +12,7 @@ class Quiz extends Model {
 
 	protected $fillable = ['title', 'description', 'number_of_questions'];
 	protected $guarded = ['user_id'];
+	protected $dates = ['deleted_at'];
 
 	public function getRouteKeyName() {
 		return 'id';

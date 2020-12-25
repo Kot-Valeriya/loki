@@ -45,6 +45,10 @@ class User extends Authenticatable {
 	}
 
 	public function quizzes() {
-		return $this->hasMany(Quiz::class);
+		return $this->hasMany(Quiz::class); //->withTrashed();
 	}
+
+	/*public function resolveRouteBinding($value){
+		return $this->where('user',$value)->first()??abort(404);
+    }*/
 }

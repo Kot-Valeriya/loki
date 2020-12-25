@@ -7,14 +7,14 @@
 <link href="{{ asset('css/style.css')}}" rel="stylesheet"/>
 <link href="{{ asset('css/style-desktop.css')}}" rel="stylesheet"/>
 <link href="{{ asset('css/util.css') }}" rel="stylesheet" type="text/css"/>
-<link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css"/>
-<link href="{{ asset('css/user-profile-page-style.css')}}" rel="stylesheet"/>
+<link href="{{ asset('css/main.css?v=2') }}" rel="stylesheet" type="text/css"/>
+<link href="{{ asset('css/user-profile-page-style.css?v=2')}}" rel="stylesheet"/>
 <script src="{{asset('js/profile.js')}}"></script>
 @endsection
 
 @section('body')
 <body class="homepage">
-    @endsection
+@endsection
 
 @section('content')
     <div id="content">
@@ -39,7 +39,8 @@
   <div class="clearfix"></div>
   <div class="filter-btn">
 
-    <a id="all" class="tooltip" href="{{route('users.edit',['user'=>$user->id])}}"><span class="tooltiptext">Edit profile</span></a>
+    <a id="all" class="tooltip" href="{{route('users.edit',['user'=>$user->id])}}"><span class="tooltiptext">
+    Edit profile</span></a>
     <a id="three" class="tooltip" href="{{route('users.quizzes',['user'=>$user->id])}}"><span class="tooltiptext">Edit quizzes</span></a>
 
     <span class="toggle-btn ion-funnel"></span>
@@ -107,10 +108,76 @@
       </li>
 
       @endforeach
+          </ul>
        @else
-      <span class="task-title">You have not created any quizzes</span>
+      <span class="task-title">
+      You have not created any quizzes
+    </span>
        @endif
+
+        @if($deletedQuizzes->isNotEmpty())
+        <div class="title">
+      <h3>Your deleted quizzes</h3>
+    </div>
+
+    <ul class="points">
+      @foreach($deletedQuizzes as $trashed)
+              <li class="red">
+
+      <div class="delete-btn">
+          <span
+        class="toggle-btn"
+        data-tooltip="Permanently delete quiz">
+
+        <form action="
+       {{ route('quizzes.delete',
+             ['quizTrashed'=>$trashed])}}"
+        id="deletePermanently{{$loop->iteration}}"
+        method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        @csrf
+       </form>
+
+          <button
+        form="deletePermanently{{$loop->iteration}}"
+         type="submit">
+          </button>
+          </span>
+        </div>
+
+        <div class="restore-btn delete-btn">
+          <span
+        class="toggle-btn"
+        data-tooltip="Restore quiz">
+
+        <form action="
+       {{ route('quizzes.restore',
+             ['quizTrashed'=>$trashed])}}"
+        id="restore{{$loop->iteration}}"
+        method="post">
+        @csrf
+        @method('patch')
+
+       </form>
+
+          <button
+        form="restore{{$loop->iteration}}"
+         type="submit">
+          </button>
+
+          </span>
+        </div>
+        <span class="task-title">
+          {{$trashed->title}}
+        </span>
+        <span class="task-time">{{$trashed->created_at}}</span>
+        <span class="task-cat">{{$trashed->description}}</span>
+      </li>
+
+      @endforeach
     </ul>
+    @endif
+
   </div>
 </div>
                     </div>

@@ -260,6 +260,14 @@ ul.points li.yellow:after {
   background: #ff9900;
 }
 
+ul.points li.red:after {
+  background: red;
+}
+
+li.red{
+  border-block-end:1px solid #DDDD;
+}
+
 ul.points::after {
   content: '';
   position: absolute;

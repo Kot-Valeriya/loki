@@ -42,7 +42,9 @@ class UserController extends Controller {
 	 */
 	public function show(User $user) {
 		$user->load('quizzes');
-		return view('profile', compact('user'));
+
+		$deletedQuizzes = $user->quizzes()->onlyTrashed()->get();
+		return view('profile', compact('user', 'deletedQuizzes'));
 	}
 
 	/**

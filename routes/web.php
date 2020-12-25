@@ -24,25 +24,31 @@ Route::resource('questions', 'QuestionController', [
 ]);
 
 Route::middleware('auth')->group(function () {
+	Route::prefix('/quizzes')->group(function () {
 
-	Route::get('/quizzes/create', 'QuizController@create')
-		->name('quizzes.create');
-	Route::post('/quizzes', 'QuizController@store')
-		->name('quizzes.store');
+		Route::get('/create', 'QuizController@create')
+			->name('quizzes.create');
+		Route::post('/', 'QuizController@store')
+			->name('quizzes.store');
 
-	Route::get('/quizzes/{quiz}/edit', 'QuizController@edit')
-		->name('quizzes.edit');
-	Route::patch('/quizzes/{quiz}', 'QuizController@update')
-		->name('quizzes.update');
+		Route::get('/{quiz}/edit', 'QuizController@edit')
+			->name('quizzes.edit');
+		Route::patch('/{quiz}', 'QuizController@update')
+			->name('quizzes.update');
 
-	Route::post('/quizzes/{quiz}/result', 'HandleResultController');
+		Route::patch('/trashed/{quizTrashed}', 'QuizController@restore')
+			->name('quizzes.restore');
+		Route::delete('/{quiz}', 'QuizController@destroy')
+			->name('quizzes.destroy');
+		Route::delete('/trashed/{quizTrashed}', 'QuizController@delete')
+			->name('quizzes.delete');
 
-	Route::delete('/quizzes/{quiz}', 'QuizController@destroy')->name('quizzes.destroy');
+		Route::get('/{quiz}/questions/create', 'QuestionController@create')
+			->name('quizzes.questions.create');
+		Route::post('/{quiz}/questions', 'QuestionController@store')
+			->name('quizzes.questions.store');
+	});
 
-	Route::get('/quizzes/{quiz}/questions/create', 'QuestionController@create')
-		->name('quizzes.questions.create');
-	Route::post('/quizzes/{quiz}/questions', 'QuestionController@store')
-		->name('quizzes.questions.store');
 	//Route::post('/quizzes/{quiz}/questions', 'QuizController@store')
 	//->name('quizzes.questions.store');
 
@@ -61,6 +67,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/quizzes', 'QuizController@index')->name('quizzes.index');
+Route::post('/quizzes/{quiz}/result', 'HandleResultController')
+	->name('quizzes.result');
 
 Route::get('/leaderboard', 'UserController@index')
 	->name('leaderboard');

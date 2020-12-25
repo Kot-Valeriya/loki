@@ -460,9 +460,15 @@ textarea.input2 + .focus-input2::after {
   width: 40px;
   height: 40px;
   transition: all 0.4s ease-in-out 0s;
- 
-
 }
+
+.restore-btn {
+  position: relative;
+}
+
+.restore-btn button {
+  background:url('/images/icons/restore.png') no-repeat top /contain ;
+ }
 
 .delete-btn button {
   background:url('/images/icons/delete.png') no-repeat top /contain ;
