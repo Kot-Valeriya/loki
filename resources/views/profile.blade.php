@@ -118,6 +118,7 @@
         @if($deletedQuizzes->isNotEmpty())
         <div class="title">
       <h3>Your deleted quizzes</h3>
+      <p>Those quizzes will be stored in trash for <b>30 days</b> before permanent deletion</p>
     </div>
 
     <ul class="points">
@@ -131,7 +132,7 @@
 
         <form action="
        {{ route('quizzes.delete',
-             ['quizTrashed'=>$trashed])}}"
+             ['quizTrashed'=>$trashed->id])}}"
         id="deletePermanently{{$loop->iteration}}"
         method="post">
         <input type="hidden" name="_method" value="DELETE">
@@ -152,7 +153,7 @@
 
         <form action="
        {{ route('quizzes.restore',
-             ['quizTrashed'=>$trashed])}}"
+             ['quizTrashed'=>$trashed->id])}}"
         id="restore{{$loop->iteration}}"
         method="post">
         @csrf

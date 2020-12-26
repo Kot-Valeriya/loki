@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\QuizRequest;
 use App\Models\Quiz;
 use App\models\User;
 use App\Traits\SetValues;
@@ -17,6 +18,7 @@ class QuizController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
+
 		return view('quizzes.index',
 			['quizzes' => Quiz::latest()->simplePaginate(9)]);
 	}
@@ -28,7 +30,7 @@ class QuizController extends Controller {
 	public function list(int $id) {
 
 		return view('quizzes.index',
-			['quizzes' => Quiz::where('user_id', $id)->simplePaginate(9)]);
+			['quizzes' => Quiz::latest()->where('user_id', $id)->simplePaginate(9)]);
 	}
 
 	/**
@@ -118,7 +120,9 @@ class QuizController extends Controller {
 	 * @param  \App\Models\Quiz  $quiz
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(QuizRequest $request, Quiz $quiz) {
+	public function update(Request $request, Quiz $quiz) {
+
+		$this->authorize('update', $quiz);
 
 		if ($request->input('sbmt-btn') === "create") {
 			\DB::beginTransaction();
@@ -153,10 +157,12 @@ class QuizController extends Controller {
 	 * @param  \App\Models\Quiz  $quiz
 	 * @return \Illuminate\Http\Response
 	 */
-	public function restore(Quiz $quiz) {
+	public function restore($quizId) {
+
+		$quiz = Quiz::onlyTrashed()->find($quizId);
+		$this->authorize('restore', $quiz);
 
 		$quiz->restore();
-		//dd($quiz);
 
 		return redirect()->
 			back()->
@@ -169,6 +175,9 @@ class QuizController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy(Quiz $quiz) {
+
+		$this->authorize('delete', $quiz);
+
 		$userId = $quiz->user_id;
 		$quiz->delete();
 
@@ -182,12 +191,13 @@ class QuizController extends Controller {
 	 * @param  \App\Models\Quiz  $quiz
 	 * @return \Illuminate\Http\Response
 	 */
-	public function delete(Quiz $quiz) {
+	public function delete($quizId) {
+
+		$quiz = Quiz::onlyTrashed()->find($quizId);
+		$this->authorize('forceDelete', $quiz);
 
 		$userId = $quiz->user_id;
-
 		$quiz->forceDelete();
-		//dd($quiz);
 
 		return redirect()->
 			back()->
