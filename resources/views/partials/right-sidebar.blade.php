@@ -3,7 +3,7 @@
     <section>
         <header>
             <h2>
-                Recently added
+                {{__('partials.newcomes')}}
             </h2>
         </header>
         <ul class="style">

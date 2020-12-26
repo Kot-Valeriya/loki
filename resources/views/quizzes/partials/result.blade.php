@@ -10,14 +10,14 @@
     <div class="user-profile">
       <img src="{{url('/images/user-picture.png')}}">
       <div class="user-details">
-        <h4>Your score : {{$score}}</h4>
+        <h4> @php echo __('form-quiz.score', ['score'=>$score]);@endphp</h4>
       </div>
     </div>
   </div>
   <div class="clearfix"></div>
   <div class="bottom">
     <div class="title">
-      <h3>Correct answers :</h3>
+      <h3>{{__('form-quiz.correct')}}</h3>
     </div>
 
 <ul class="points">
@@ -58,14 +58,14 @@
         <button class="contact2-form-btn"  type="submit"
         form="check">
             <span>
-              View other tests
+              {{__('form-quiz.anotherTest')}}
             </span>
         </button>
 
 
         <button class="contact2-form-btn"  type="submit" form="leaderboard">
             <span>
-            Check out leaderboard
+            {{__('form-quiz.leaderboard')}}
           </span>
         </button>
 

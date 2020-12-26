@@ -19,7 +19,7 @@ method="POST">
 <span class="contact2-form-title">
     {{ $quiz->title }}
     <p>
-        Here you may update your question
+        {{__('form-question.updateQuestion')}}
     </p>
 </span>
 
@@ -46,7 +46,7 @@ method="POST">
     form="edit">
         <span
         class="focus-input2
-        {{ $errors->has('question')? 'danger' : '' }}" data-placeholder="{{ $errors->has('question')? $errors->first('question'): 'QUESTION' }}">
+        {{ $errors->has('question')? 'danger' : '' }}" data-placeholder="{{ $errors->has('question')? $errors->first('question'): __('form-question.question') }}">
         </span>
     </input>
 </div>
@@ -97,7 +97,7 @@ data-validate="Correct answer is required">
      <div class="delete-btn">
         <span
         class="toggle-btn"
-        data-tooltip="Delete answer">
+        data-tooltip="{{__('form-question.deleteAnswer')}}">
         <button
         form="delete{{$loop->iteration}}"
          type="submit">
@@ -114,7 +114,7 @@ data-validate="Correct answer is required">
     form="edit">
             <span
             class="focus-input2 {{ $errors->has('rightAnswer')? 'danger' : '' }}"
-            data-placeholder="{{ $errors->has('rightAnswer')? $errors->first('rightAnswer'): 'CORRECT ANSWER' }}">
+            data-placeholder="{{ $errors->has('rightAnswer')? $errors->first('rightAnswer'): __('form-question.correctAnswer') }}">
             </span>
         </input>
     </input>
@@ -151,7 +151,7 @@ data-validate="Correct answer is required">
         name="existWrongAnswer {{$loop->iteration}}" type="text"
         value="{{$answer->answer}}"
         form="edit">
-            <span class="focus-input2 {{ $errors->has('wrongAnswer')? 'danger' : '' }}" data-placeholder="{{ $errors->has('wrongAnswer')? $errors->first('wrongAnswer'): 'WRONG ANSWER' }}">
+            <span class="focus-input2 {{ $errors->has('wrongAnswer')? 'danger' : '' }}" data-placeholder="{{ $errors->has('wrongAnswer')? $errors->first('wrongAnswer'): __('form-question.wrongAnswer') }}">
             </span>
         </input>
     </input>
@@ -175,7 +175,7 @@ data-validate="Correct answer is required">
         type="submit"
         value="add"
         form="edit">
-            Done !
+            {{__('form-question.doneBtn')}}
         </button>
 
     </div>

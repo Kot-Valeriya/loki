@@ -15,26 +15,26 @@
         <input class="input2" name="title" type="text" value="{{$quiz->title}}">
             <span
             class="focus-input2 {{ $errors->has('title')? 'danger' : '' }}"
-            data-placeholder="{{ $errors->has('title')? $errors->first('title'): 'TITLE'}}"
+            data-placeholder="{{ $errors->has('title')? $errors->first('title'): __('form-quiz.title')}}"
             value=" {{$quiz->title}} ">
             </span>
         </input>
     </div>
 
-    <div class="wrap-input2 validate-input" data-validate="Description is required">
+    <div class="wrap-input2 validate-input">
          <br/>
         <textarea class="input2" name="description" value="{{$quiz->description}}">{{$quiz->description}}
         </textarea>
         <span
         class="focus-input2 {{ $errors->has('description')? 'danger' : '' }}"
-        data-placeholder="{{ $errors->has('description')? $errors->first('description'): 'DESCRIPTION' }}"
+        data-placeholder="{{ $errors->has('description')? $errors->first('description'): __('form-quiz.description') }}"
         value="{{$quiz->description}}">
         </span>
     </div>
 
     @foreach($quiz->questions as $question)
 
-    <div class="wrap-input2 validate-input" data-validate="Question is required">
+    <div class="wrap-input2 validate-input" data-validate>
     <br/>
 
     <div class="edit-btn">
@@ -43,7 +43,7 @@
 
 
          <input class="input2" name="question{{$loop->iteration}}" type="text" value="{{$question->question}}">
-            <span class="focus-input2 {{ $errors->has('question')? 'danger' : '' }}" data-placeholder="{{ $errors->has('question')? $errors->first('question'): $loop->iteration.'. QUESTION' }}">
+            <span class="focus-input2 {{ $errors->has('question')? 'danger' : '' }}" data-placeholder="{{ $errors->has('question')? $errors->first('question'): $loop->iteration.'. '__('form-quiz.question') }}">
             </span>
         </input>
     </div>
@@ -55,7 +55,7 @@
     <div class="wrap-input2 validate-input" data-validate="Correct answer is required">
           <br/>
             <input class="input2" name="rightAnswer{{$loop->parent->iteration}}.{{$loop->iteration}}" type="text" value="{{$answer->answer}}">
-                <span class="focus-input2 {{ $errors->has('rightAnswer')? 'danger' : '' }}" data-placeholder="{{ $errors->has('rightAnswer')? $errors->first('rightAnswer'): 'CORRECT ANSWER' }}">
+                <span class="focus-input2 {{ $errors->has('rightAnswer')? 'danger' : '' }}" data-placeholder="{{ $errors->has('rightAnswer')? $errors->first('rightAnswer'): __('form-quiz.correctAnswer') }}">
                 </span>
         </input>
     </div>
@@ -66,7 +66,7 @@
     <div class="wrap-input2 validate-input" data-validate="Answer is required">
         <br/>
       <input class="input2" name="wrongAnswer{{$loop->parent->iteration}}.{{$loop->iteration}}" type="text" value="{{$answer->answer}}">
-        <span class="focus-input2 {{ $errors->has('wrongAnswer')? 'danger' : '' }}" data-placeholder="{{ $errors->has('wrongAnswer')? $errors->first('wrongAnswer'): 'WRONG ANSWER' }}">
+        <span class="focus-input2 {{ $errors->has('wrongAnswer')? 'danger' : '' }}" data-placeholder="{{ $errors->has('wrongAnswer')? $errors->first('wrongAnswer'): __('form-quiz.wrongAnswer') }}">
         </span>
       </input>
     </div>
@@ -83,13 +83,13 @@
 
         <button class="contact2-form-btn" name="sbmt-btn"  value="save" type="submit">
         <span>
-            Done !
+            {{__('form-quiz.doneBtn')}}
         </span>
         </button>
 
         <button class="contact2-form-btn" type="submit" name="sbmt-btn" value="create">
             <span>
-            Add new question !
+                {{__('form-quiz.addNew')}}
            </span>
         </button>
     </div>

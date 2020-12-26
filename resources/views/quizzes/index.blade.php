@@ -11,10 +11,10 @@
         <div class="container" id="content">
             <header class="header">
                 @if(Request::segment(3)==='quizzes')
-                <h2>Click to edit selected quiz
+                <h2>{{__('form-quiz.selectQuiz')}}
                  </h2>
                 @else
-                 <h2>Choose your quiz !</h2>
+                 <h2>{{__('form-quiz.selectQuizInf')}}</h2>
             @endif
             </header>
         <div>

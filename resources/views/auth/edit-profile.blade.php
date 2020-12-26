@@ -4,13 +4,13 @@
     @csrf
     @method('PATCH')
     <span class="contact2-form-title">
-        Update my data
+         {!!__('form-profile.title')!!}
     </span>
 
     <div class="wrap-input2 validate-input" data-validate="Name is required">
          <br/>
         <input autocomplete="name" autofocus="" class=" input2 form-control @error('name') is-invalid @enderror" id="name" name="name" required="" type="text" value="{{ $user->name ?? old('name') }}">
-            <span class="focus-input2" data-placeholder="{{ __('Name') }}">
+            <span class="focus-input2" data-placeholder=" {!!__('form-profile.name')!!}">
             </span>
             @error('name')
             <span class="invalid-feedback" role="alert">
@@ -25,7 +25,7 @@
 <div class="wrap-input2 validate-input" data-validate="Valid email is required: ex@abc.xyz">
     <br/>
     <input autocomplete="email" class="input2 form-control @error('email') is-invalid @enderror" id="email" name="email" required="" type="email" value="{{ $user->email ?? old('email') }}">
-        <span class="focus-input2" data-placeholder="  {{ __('E-Mail Address') }}">
+        <span class="focus-input2" data-placeholder="{!!__('form-profile.e-mail')!!}">
         </span>
         @error('email')
         <span class="invalid-feedback" role="alert">
@@ -42,7 +42,7 @@
         <div class="contact2-form-bgbtn">
         </div>
         <button class="contact2-form-btn" type="submit">
-            Save
+            {!!__('form-profile.save')!!}
         </button>
     </div>
 </div>

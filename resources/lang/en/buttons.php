@@ -8,4 +8,13 @@ return [
 	'header3' => 'Tests',
 	'header4' => 'Leaderboard', //'Score table',
 	'header5' => 'About',
+	'leaderboard' => 'Check out the leaderboard',
+	'language' => 'Language',
+	'editQuizzes' => 'Edit quiz',
+	'editProfile' => 'Edit profile',
+	'header6' => 'Login',
+	'header7' => 'Register',
+    'logout' => 'Logout',
 ];
+];
+?>

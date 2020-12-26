@@ -7,4 +7,7 @@ return [
 		<p>Challenge yourself! Want to know how good you at <i>spelling</i> or <i>even programming</i>, or how loyal a fan of <i>"Harry Potter"</i> or <i>"Game of Thrones"</i> you are? Go to the catalog of already created quizzes and use your wits!</p>',
 	'block2' => '<h3>Create your own quiz!</h3>
 		<p>Create test of any type to engage your audience in interactive way: for learning or just for fun. Develop brain teaser puzzle to challenge your friends, identify gaps in knowledge and obtain results!</p>',
-];
+	'block3' => '<h3> Compete with your friends! </h3>
+<p> Review the ranking table and find out who is the "smartest". Improve your position by taking new quizzes. </p>',
+
+];?>

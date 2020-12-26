@@ -3,8 +3,8 @@
 			<div class="container">
 				<section>
 					<header>
-						<h2>Get in touch</h2>
-						<span class="byline">Integer sit amet pede vel arcu aliquet pretium</span>
+						<h2>{!!__('partials.touch')!!}</h2>
+						<span class="byline">{!!__('partials.developer')!!}</span>
 					</header>
 					<ul class="contact">
 						<li><a href="#" class="fa fa-twitter"><span>Twitter</span></a></li>

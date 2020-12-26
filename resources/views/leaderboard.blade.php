@@ -16,20 +16,18 @@
                 <header>
                     <h2 class="leaderboard">
                         <span class="yellow">
-                            Leaderboard
+                            {{__('leaderboard.leaderboard')}}
                         </span>
                     </h2>
                     <h3 class="leaderboard">
                         @guest
                         <a class="leaderboard yellow" href="{{ route('register') }}" target="_blank">
-                            Register
-                        </a>
-                        and stand at the top of the leaderboard by passing new quizzes !
+                            {!!__('leaderboard.registerText')!!}
                         @endguest
                         @auth
-                        Stand at the top of the leaderboard by passing
+                        {!!__('leaderboard.authText')!!}
                         <a class="leaderboard" href="{{ route('quizzes.index') }}" target="_blank">
-                            new quizzes
+                            {!!__('leaderboard.authText1')!!}
                         </a>
                         !
                         @endauth
@@ -41,22 +39,22 @@
                     <tr>
                         <th>
                             <h1>
-                                Position
+                                {{__('leaderboard.position')}}
                             </h1>
                         </th>
                         <th>
                             <h1>
-                                Nickname
+                                {{__('leaderboard.nickname')}}
                             </h1>
                         </th>
                         <th>
                             <h1>
-                                Entered on
+                                {{__('leaderboard.enteredOn')}}
                             </h1>
                         </th>
                         <th>
                             <h1>
-                                Score
+                                 {{__('leaderboard.score')}}
                             </h1>
                         </th>
                     </tr>

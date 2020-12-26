@@ -23,7 +23,7 @@
        <div class="container-contact2">
           <div class="wrap-contact2">
             <span class="contact2-form-title">
-            Your profile
+            {!!__('profile.profileHeader')!!}
             </span>
 <div class="muck-up">
   <div class="overlay"></div>
@@ -40,15 +40,15 @@
   <div class="filter-btn">
 
     <a id="all" class="tooltip" href="{{route('users.edit',['user'=>$user->id])}}"><span class="tooltiptext">
-    Edit profile</span></a>
-    <a id="three" class="tooltip" href="{{route('users.quizzes',['user'=>$user->id])}}"><span class="tooltiptext">Edit quizzes</span></a>
+    {!!__('profile.editProfile')!!}</span></a>
+    <a id="three" class="tooltip" href="{{route('users.quizzes',['user'=>$user->id])}}"><span class="tooltiptext">{!!__('profile.editQuizzes')!!}</span></a>
 
     <span class="toggle-btn ion-funnel"></span>
   </div>
   <div class="clearfix"></div>
   <div class="bottom">
     <div class="title">
-      <h3>Your score</h3>
+      <h3>{!!__('profile.scoreHeader')!!}</h3>
     </div>
     <ul class="points">
       <li class="yellow">
@@ -57,12 +57,12 @@
           <img src="{{url('/images/award2.png')}}">
           <img src="{{url('/images/award3.png')}}">
         </div>
-        <span class="task-title">Score : </span>
+        <span class="task-title">{!!__('profile.score')!!} : </span>
         <span class="task-title">{{$user->score}}</span>
       </li>
     </ul>
     <div class="title">
-      <h3>Your quizzes</h3>
+      <h3>{!!__('profile.quizzesHeader')!!}</h3>
     </div>
 
      @if(session()->has('message'))
@@ -94,7 +94,7 @@
          <div class="delete-btn">
           <span
         class="toggle-btn"
-        data-tooltip="Delete quiz">
+        data-tooltip="{!!__('profile.deleteQuiz')!!}">
           <button
         form="delete{{$loop->iteration}}"
          type="submit">
@@ -111,14 +111,13 @@
           </ul>
        @else
       <span class="task-title">
-      You have not created any quizzes
+      {!!__('profile.emptyTrash')!!}
     </span>
        @endif
 
         @if($deletedQuizzes->isNotEmpty())
         <div class="title">
-      <h3>Your deleted quizzes</h3>
-      <p>Those quizzes will be stored in trash for <b>30 days</b> before permanent deletion</p>
+      {!!__('profile.deletedQuizzesHeader')!!}
     </div>
 
     <ul class="points">
@@ -128,7 +127,7 @@
       <div class="delete-btn">
           <span
         class="toggle-btn"
-        data-tooltip="Permanently delete quiz">
+        data-tooltip="{!!__('deletePermanently')!!}">
 
         <form action="
        {{ route('quizzes.delete',
@@ -149,7 +148,7 @@
         <div class="restore-btn delete-btn">
           <span
         class="toggle-btn"
-        data-tooltip="Restore quiz">
+        data-tooltip="{!!__('restoreQuiz')!!}">
 
         <form action="
        {{ route('quizzes.restore',

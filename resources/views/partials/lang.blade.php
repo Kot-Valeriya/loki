@@ -1,6 +1,6 @@
 <!--<ul class="navbar-nav ml-auto"> <div class="nav-wrapper">-->
 @php $locale = session()->get('locale'); @endphp
-<div class="sl-nav"> Language:
+<div class="sl-nav"> {!!__('buttons.language')!!}:
  <ul>
   <li>
     @switch($locale)
@@ -11,7 +11,7 @@
       @break
 
       @case('ru')
-      <i class="sl-flag flag-ua">
+      <i class="sl-flag flag-ru">
         <div id="germany"></div> </i>
       @break
 

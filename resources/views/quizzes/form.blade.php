@@ -20,16 +20,16 @@
               <header>
 
                 @if(Request::segment(3)==="edit")
-                <h2>Edit your quiz</h2>
-                <span class="byline">You may update any data in your quiz in minutes here !</span>
+                <h2>{{__('form-quiz.editQuiz')}}</h2>
+                <span class="byline">{{__('form-quiz.editQuizInf')}}</span>
 
                 @elseif(Route::currentRouteName()==="quizzes.show")
-                <h2>Time to get your brains out of neutral !</h2>
+                <h2>{{__('form-quiz.textBrainstorm')}}</h2>
                 <span class="byline">{{$quiz->description}}</span>
 
                 @else
-                <h2>Time to create something amazing !</h2>
-                <span class="byline">Create an awesome quiz in minutes</span>
+                <h2>{{__('form-quiz.createQuiz')}}</h2>
+                <span class="byline">{{__('form-quiz.createQuizInf')}}</span>
                 @endif
 
                  <div class="bg-contact2" style="background-image: url('/images/bg-01.jpg');">

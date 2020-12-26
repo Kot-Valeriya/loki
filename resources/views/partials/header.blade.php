@@ -15,7 +15,7 @@
                     @if (Route::has('login'))
                 <li class="{{Request::path()==='login'? 'active':''}}">
                     <a class="nav-link" href="{{ route('login') }}">
-                        {{ __('Login') }}
+                         {{__('buttons.header6')}}
                     </a>
                 </li>
                 @endif
@@ -23,7 +23,7 @@
                     @if (Route::has('register'))
                 <li class="{{Request::path()==='register'? 'active':''}}">
                     <a class="nav-link" href="{{ route('register') }}">
-                        {{ __('Register') }}
+                         {{__('buttons.header7')}}
                     </a>
                 </li>
                 @endif
@@ -44,7 +44,7 @@
                                         <li>
                                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
+                                                {{ __('buttons.logout') }}
                                             </a>
                                         </li>
                                         <form action="{{ route('logout') }}" class="d-none" id="logout-form" method="POST">
