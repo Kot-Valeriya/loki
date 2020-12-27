@@ -15,6 +15,10 @@ input[type="checkbox"] + label.correct:before {
 /*Checkboxes styles*/
 input[type="checkbox"] { display: none; }
 
+input[type="checkbox"] + label.point {
+    color: #c8a56f;
+}
+
 input[type="checkbox"] + label {
   display: block;
   position: relative;

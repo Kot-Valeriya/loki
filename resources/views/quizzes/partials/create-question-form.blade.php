@@ -25,7 +25,7 @@
                  <p>
                   @php
                   echo trans_choice(
-                    'form-quiz.remains',
+                    'form-question.remains',
                    request()->session()->get('remainingQuestions'),
                  );
                   @endphp
@@ -68,9 +68,9 @@
               <button name="sbmt-btn" value="add" type="submit" class="contact2-form-btn" style="background: url(/images/right-arrow.png) no-repeat right center;" >
 
                @if(request()->session()->get('remainingQuestions') ===0)
-                {{__('form-quiz.done')}}
+                {{__('form-question.done')}}
                @else
-               {{__('form-quiz.nextQuestion')}}
+               {{__('form-question.nextQuestion')}}
                @endif
       </button>
     </div>

@@ -14,7 +14,6 @@ return [
 	'editProfile' => 'Edit profile',
 	'header6' => 'Login',
 	'header7' => 'Register',
-    'logout' => 'Logout',
-];
+	'logout' => 'Logout',
 ];
 ?>
