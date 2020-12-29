@@ -43,7 +43,14 @@
 
 
          <input class="input2" name="question{{$loop->iteration}}" type="text" value="{{$question->question}}">
-            <span class="focus-input2 {{ $errors->has('question')? 'danger' : '' }}" data-placeholder="{{ $errors->has('question')? $errors->first('question'): $loop->iteration.'. '__('form-quiz.question') }}">
+            <span class="focus-input2
+            {{ $errors->has('question$loop->iteration') ? 'danger' : '' }}"
+            data-placeholder="
+            {{
+                $errors->has('question$loop->iteration') ?
+                $errors->first('question$loop->iteration') :
+                $loop->iteration.'. '. __('form-quiz.question')
+            }}">
             </span>
         </input>
     </div>
@@ -54,8 +61,17 @@
     @if($answer->is_correct)
     <div class="wrap-input2 validate-input" data-validate="Correct answer is required">
           <br/>
-            <input class="input2" name="rightAnswer{{$loop->parent->iteration}}.{{$loop->iteration}}" type="text" value="{{$answer->answer}}">
-                <span class="focus-input2 {{ $errors->has('rightAnswer')? 'danger' : '' }}" data-placeholder="{{ $errors->has('rightAnswer')? $errors->first('rightAnswer'): __('form-quiz.correctAnswer') }}">
+            <input class="input2"
+            name="rightAnswer{{$loop->parent->iteration}}.{{$loop->iteration}}"
+            type="text"
+            value="{{$answer->answer}}">
+                <span
+                class="focus-input2
+                {{ $errors->has('rightAnswer'.$loop->parent->iteration.'_'.$loop->iteration)? 'danger' : '' }}"
+                data-placeholder="
+                {{ $errors->has('rightAnswer'.$loop->parent->iteration.'_'.$loop->iteration)?
+                $errors->first('rightAnswer'.$loop->parent->iteration.'_'.$loop->iteration):
+                __('form-quiz.correctAnswer') }}">
                 </span>
         </input>
     </div>
@@ -65,8 +81,15 @@
     @else
     <div class="wrap-input2 validate-input" data-validate="Answer is required">
         <br/>
-      <input class="input2" name="wrongAnswer{{$loop->parent->iteration}}.{{$loop->iteration}}" type="text" value="{{$answer->answer}}">
-        <span class="focus-input2 {{ $errors->has('wrongAnswer')? 'danger' : '' }}" data-placeholder="{{ $errors->has('wrongAnswer')? $errors->first('wrongAnswer'): __('form-quiz.wrongAnswer') }}">
+      <input class="input2"
+      name="wrongAnswer{{$loop->parent->iteration}}.{{$loop->iteration}}"
+      type="text"
+      value="{{$answer->answer}}">
+        <span class="focus-input2
+        {{ $errors->has('wrongAnswer'.$loop->parent->iteration.'_'.$loop->iteration)? 'danger' : '' }}"
+        data-placeholder="{{ $errors->has('wrongAnswer'.$loop->parent->iteration.'_'.$loop->iteration)?
+        $errors->first('wrongAnswer'.$loop->parent->iteration.'_'.$loop->iteration):
+        __('form-quiz.wrongAnswer') }}">
         </span>
       </input>
     </div>

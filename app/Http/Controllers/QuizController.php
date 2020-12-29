@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\QuizRequest;
+use App\Http\Requests\QuizUpdateRequest;
 use App\Models\Quiz;
 use App\models\User;
 use App\Traits\SetValues;
@@ -27,10 +28,10 @@ class QuizController extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function list(int $id) {
+	public function list($user) {
 
 		return view('quizzes.index',
-			['quizzes' => Quiz::latest()->where('user_id', $id)->simplePaginate(9)]);
+			['quizzes' => Quiz::latest()->where('user_id', $user->id)->simplePaginate(9)]);
 	}
 
 	/**
@@ -120,8 +121,8 @@ class QuizController extends Controller {
 	 * @param  \App\Models\Quiz  $quiz
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, Quiz $quiz) {
-
+	public function update(QuizUpdateRequest $request, Quiz $quiz) {
+		dd($request);
 		$this->authorize('update', $quiz);
 
 		if ($request->input('sbmt-btn') === "create") {

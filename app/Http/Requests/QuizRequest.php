@@ -20,6 +20,7 @@ class QuizRequest extends FormRequest {
 	 * @return array
 	 */
 	public function rules() {
+
 		return [
 			'title' => 'required|min:4|max:50',
 			'description' => 'required|min:15|max:600',
@@ -30,7 +31,7 @@ class QuizRequest extends FormRequest {
 		];
 	}
 
-	public function messages() {
+	/*public function messages() {
 		$locale = session()->get('locale', 'en');
 		switch ($locale) {
 		case 'ua':
@@ -49,5 +50,5 @@ class QuizRequest extends FormRequest {
 			break;
 		}
 
-	}
+	}*/
 }

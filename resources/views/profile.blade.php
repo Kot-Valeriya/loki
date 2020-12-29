@@ -39,9 +39,20 @@
   <div class="clearfix"></div>
   <div class="filter-btn">
 
-    <a id="all" class="tooltip" href="{{route('users.edit',['user'=>$user->id])}}"><span class="tooltiptext">
-    {!!__('profile.editProfile')!!}</span></a>
-    <a id="three" class="tooltip" href="{{route('users.quizzes',['user'=>$user->id])}}"><span class="tooltiptext">{!!__('profile.editQuizzes')!!}</span></a>
+    <a id="all"
+    class="tooltip"
+    href="{{route('users.edit',['user'=>$user->id])}}">
+    <span class="tooltiptext">
+    {!!__('profile.editProfile')!!}
+  </span>
+</a>
+
+    <a id="three"
+    class="tooltip" href="{{route('users.quizzes',['user'=>$user->id])}}">
+    <span class="tooltiptext">
+    {!!__('profile.editQuizzes')!!}
+  </span>
+</a>
 
     <span class="toggle-btn ion-funnel"></span>
   </div>

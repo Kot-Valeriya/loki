@@ -64,7 +64,7 @@
                     <tr>
                         <td>
                             <div class="award-image-wrap">
-                                @if($loop->iteration<=3)
+                                @if($loop->iteration<=3 && $users->onFirstPage())
 
                                     <img src="images/award{{$loop->iteration}}.png"/>
 

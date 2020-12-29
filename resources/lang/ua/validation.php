@@ -116,7 +116,11 @@ return [
         ],
     ],
 
-    'attributes' => [],
+    'attributes' => [
+        'email'=>'E-mail адреса',
+        'wrongAnswer'=> 'Варіант неправильної відповіді',
+        'rightAnswer'=>'Варіант правильної відповіді',
+    ],
 
 ];
 ?>
