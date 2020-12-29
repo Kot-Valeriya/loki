@@ -13,7 +13,7 @@
                     {{$quiz->title}} |  {{$quiz->updated_at}}
                 </p>
                 <p>
-                    <a href="#">
+                    <a href="{{route('quizzes.show',['quiz'=>$quiz->id])}}">
                         {{$quiz->description}}
                     </a>
                 </p>
