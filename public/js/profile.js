@@ -9,5 +9,9 @@ $(function() {
 
   });
 
+  $('input[type=file][name="profile_picture"]').change(function() {
+  	window.console && console.log('File uploaded');
+      $("#submitButton").show();
+     });
 });
 

@@ -3,13 +3,10 @@
 @section('title','Loki')
 
 @section('head')
-<link href="{{ asset('css/skel-noscript.css')}}" rel="stylesheet"/>
-<link href="{{ asset('css/style.css')}}" rel="stylesheet"/>
-<link href="{{ asset('css/style-desktop.css')}}" rel="stylesheet"/>
 <link href="{{ asset('css/util.css') }}" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('css/main.css?v=2') }}" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('css/user-profile-page-style.css?v=2')}}" rel="stylesheet"/>
-<script src="{{asset('js/profile.js')}}"></script>
+<script src="{{asset('js/profile.js?v=').time()}}"></script>
 @endsection
 
 @section('body')
@@ -25,17 +22,21 @@
             <span class="contact2-form-title">
             {!!__('profile.profileHeader')!!}
             </span>
+
 <div class="muck-up">
   <div class="overlay"></div>
   <div class="top">
     <div class="user-profile">
-      <img src="{{url('/images/user-picture.png')}}">
+      <img src="{{$user->profile_picture ?
+        "/uploads/profile_pictures/".Auth::user()->profile_picture :
+        url('/images/user-picture.png')}}">
       <div class="user-details">
         <h4>{{$user->name}}</h4>
         <p>{{$user->email}}</p>
       </div>
     </div>
   </div>
+
   <div class="clearfix"></div>
   <div class="filter-btn">
 
@@ -79,7 +80,7 @@
      @if(session()->has('message'))
        <div class="success-msg">
        <i class="fa fa-check"></i>
-       {{ session()->get('message') }}
+       {{ session()->pull('message') }}
     </div>
     @endif
 

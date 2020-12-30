@@ -61,9 +61,10 @@ Route::middleware('auth')->group(function () {
 
 	Route::get('/users/{user}/edit', 'UserController@edit')
 		->name('users.edit');
+	Route::patch('/users/{user}/profile_picture', 'UserController@updateAvatar')
+		->name('users.profile_picture.update');
 	Route::patch('/users/{user}', 'UserController@update')
 		->name('users.update');
-
 });
 
 Route::get('/quizzes', 'QuizController@index')->name('quizzes.index');

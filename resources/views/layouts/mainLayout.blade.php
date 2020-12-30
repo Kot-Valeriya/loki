@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="{{ asset('css/skel-noscript.css')}}" />
 		<link rel="stylesheet" href="{{ asset('css/style.css')}}" />
 		<link rel="stylesheet" href="{{ asset('css/style-desktop.css')}}" />
-		<link href="{{ asset('css/user-profile-page-style.css')}}" rel="stylesheet"/>
+		<link href="{{ asset('css/user-profile-page-style.css?v=').time()}}" rel="stylesheet"/>
 		@yield('head','')
 	</head>
 	@yield('body')

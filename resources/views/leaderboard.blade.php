@@ -3,7 +3,7 @@
 @section('title','Loki-Leaderboard')
 
 @section('head')
-<link href="{{ asset('css/leaderboard-style.css')}}" rel="stylesheet"/>
+<link href="{{ asset('css/leaderboard-style.css?v=2')}}" rel="stylesheet"/>
 @endsection
 
 @section('body')
@@ -75,7 +75,13 @@
                             </div>
                         </td>
                         <td>
-                            {{$user->name}}
+                            <div class="award-image-wrap">
+                                <img
+                                src="{{$user->profile_picture ?
+        "/uploads/profile_pictures/".Auth::user()->profile_picture :
+        url('/images/user-picture.png')}}">
+        {{$user->name}}
+                            </div>
                         </td>
                         <td>
                             {{$user->created_at}}

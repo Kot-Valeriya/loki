@@ -99,7 +99,7 @@ a.leaderboard  {
 }
 
 div.award-image-wrap img{
-   display: block;
+   display: inline-table;
   text-align: center;
   width: 35px;
 }

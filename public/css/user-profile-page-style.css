@@ -17,8 +17,8 @@
 }
 
 .overlay {
-  background: url('/images/bg-01.jpg') no-repeat top /contain;
-  position: absolute;
+  /*background: url('/images/bg-01.jpg') no-repeat top /contain;
+  */position: absolute;
   left: 0;
   top: 0;
   right: 0;
@@ -72,6 +72,56 @@
   height: 60px;
   width: 60px;
  
+}
+
+.profile-pic {
+    /*max-width: 200px;
+    max-height: 200px;*/
+    display: block;
+}
+
+.file-upload {
+    display: none;
+}
+.circle {
+    border-radius: 1000px !important;
+    overflow: hidden;
+    width: 128px;
+    height: 128px;
+    border: 8px solid rgba(255, 205, 180, 0.72);
+    position: absolute;
+    top: 250px;
+    right: 455px;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+.p-image {
+  position: absolute;
+  top: 340px;
+  right: 460px;
+  color: #666666;
+  transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+}
+.p-image:hover {
+  transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+}
+.upload-button {
+  font-size: 1.2em;
+}
+
+.upload-button:hover {
+  transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+  color: #999;
+}
+.submit{
+  position: absolute;
+  top: 340px;
+  right: 550px;
+  color: #666666;
+  transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+
 }
 
 .user-details p {

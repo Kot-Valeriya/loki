@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Image;
 
 class UserController extends Controller {
 	/**
@@ -69,6 +72,31 @@ class UserController extends Controller {
 		return redirect()->
 			route('users.show', ['user' => $user->id])->
 			with('message', 'Your profile is successfully updated');
+	}
+
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \App\Models\User  $user
+	 * @return \Illuminate\Http\Response
+	 */
+	public function updateAvatar(Request $request) {
+
+		if ($request->hasFile('profile_picture')) {
+			$profile_picture = $request->file('profile_picture');
+
+			$filename = time() . '.' . $profile_picture->getClientOriginalExtension();
+
+			$path = public_path('uploads/profile_pictures/') . "/" . $filename;
+			Image::make($profile_picture)->resize(300, 300)->save($path);
+
+			$user = Auth::user();
+			$user->profile_picture = $filename;
+			$user->save();
+		}
+
+		return redirect()->back();
 	}
 
 	/**
