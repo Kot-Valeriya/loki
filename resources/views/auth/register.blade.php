@@ -1,10 +1,29 @@
 @extends('auth.partials.form')
 @section('content-form')
-<form action="{{ route('register') }}" class="contact2-form validate-form" method="POST">
+<form
+action="{{ route('register') }}"
+enctype="multipart/form-data"
+class="contact2-form validate-form"
+method="POST">
     @csrf
     <span class="contact2-form-title">
         {{ __('form-profile.register') }}
     </span>
+
+
+<div class="circle">
+    <img class="profile-pic"  id="profile-img-tag" src="
+    {{ url('/images/user-picture.png')}}">
+    </img>
+</div>
+
+<input  hidden="" id="uploadBtn" name="profile_picture" type="file"/>
+<label for="uploadBtn">
+    <div class="p-image">
+        <i class="fa fa-camera upload-button">
+        </i>
+    </div>
+</label>
 
     <div class="wrap-input2 validate-input" data-validate="Name is required">
         <input autocomplete="name" autofocus="" class=" input2 form-control @error('name') is-invalid @enderror" id="name" name="name" required="" type="text" value="{{ old('name') }}">

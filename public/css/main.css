@@ -130,6 +130,7 @@ iframe {
 
 .wrap-contact2 {
   width: 790px;
+  position: relative;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;

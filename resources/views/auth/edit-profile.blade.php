@@ -25,7 +25,7 @@ method="POST">
 </span>
 
 <div class="circle">
-    <img class="profile-pic" src="
+    <img  id="profile-img-tag" class="profile-pic" src="
     {{$user->profile_picture ? "/uploads/profile_pictures/".Auth::user()->profile_picture : url('/images/user-picture.png')}}">
     </img>
 </div>

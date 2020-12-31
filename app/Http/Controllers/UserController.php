@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Auth;
+use App\Traits\SetProfilePicture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Image;
 
 class UserController extends Controller {
+	use SetProfilePicture;
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -81,19 +81,14 @@ class UserController extends Controller {
 	 * @param  \App\Models\User  $user
 	 * @return \Illuminate\Http\Response
 	 */
-	public function updateAvatar(Request $request) {
+	public function uploadProfilePicture(Request $request) {
 
 		if ($request->hasFile('profile_picture')) {
+
 			$profile_picture = $request->file('profile_picture');
-
-			$filename = time() . '.' . $profile_picture->getClientOriginalExtension();
-
-			$path = public_path('uploads/profile_pictures/') . "/" . $filename;
-			Image::make($profile_picture)->resize(300, 300)->save($path);
-
 			$user = Auth::user();
-			$user->profile_picture = $filename;
-			$user->save();
+
+			$this->uploadProfilePicture($profile_picture, $user);
 		}
 
 		return redirect()->back();

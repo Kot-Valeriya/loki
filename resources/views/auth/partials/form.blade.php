@@ -4,7 +4,7 @@
 
 @section('head')
 <link href="{{ asset('css/util.css') }}" rel="stylesheet" type="text/css"/>
-<link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css"/>
+<link href="{{ asset('css/main.css?v=1') }}" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('css/checkboxes-style.css') }}" rel="stylesheet" type="text/css"/>
 <script src="{{asset('js/profile.js?v=').time()}}"></script>
 @endsection
