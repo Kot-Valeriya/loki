@@ -47,6 +47,13 @@
                     </header>
                     <p>
                         {{ $quiz->description }}
+                        <br/>
+                        <ul class="tags">
+                        @foreach($quiz->tags as $tag)
+                         <li><a href="#" class="tag">{{$tag->name}}</a></li>
+
+                        @endforeach
+                    </ul>
                     </p>
                 </section>
                 @endforeach

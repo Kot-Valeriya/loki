@@ -21,7 +21,7 @@ class QuizController extends Controller {
 	public function index() {
 
 		return view('quizzes.index',
-			['quizzes' => Quiz::latest()->simplePaginate(9)]);
+			['quizzes' => Quiz::latest()->with('tags')->simplePaginate(9)]);
 	}
 	/**
 	 * Display a listing of the quizzes filtered by specified user id.

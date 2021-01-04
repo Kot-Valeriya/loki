@@ -15,7 +15,7 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
         <link rel="stylesheet" href="{{ asset('css/skel-noscript.css')}}" />
-		<link rel="stylesheet" href="{{ asset('css/style.css')}}" />
+		<link rel="stylesheet" href="{{ asset('css/style.css?v=1')}}" />
 		<link rel="stylesheet" href="{{ asset('css/style-desktop.css')}}" />
 		<link href="{{ asset('css/user-profile-page-style.css?v=').time()}}" rel="stylesheet"/>
 		@yield('head','')
