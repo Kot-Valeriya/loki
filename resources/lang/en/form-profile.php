@@ -15,5 +15,7 @@ return [
 	'notify' => 'Before proceeding, please check your email for a verification link.',
 	'if' => 'If you did not receive the email',
 	'clickHere' => 'click here to request another',
+	'reset' => 'Reset Password',
+	'sendResetLink' => 'Send Password Reset Link',
 
 ];?>
