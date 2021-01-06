@@ -33,7 +33,8 @@
                 <li class="{{Request::segment(1)==='users'? 'active':''}}">
                      <a  class="nav-link" href="{{route('users.show',['user'=>Auth::user()->id])}}">
                                     {{__('buttons.header2')}}
-                        </a>
+                    </a>
+
                     <div class="sl-nav">
                         <ul>
                             <li class="nav-item dropdown">
@@ -43,8 +44,7 @@
                                     <div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right">
                                         <li>
                                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                                {{ __('buttons.logout') }}
+                                                     document.getElementById('logout-form').submit();">{{ __('buttons.logout') }}
                                             </a>
                                         </li>
                                         <form action="{{ route('logout') }}" class="d-none" id="logout-form" method="POST">
@@ -56,6 +56,7 @@
                         </ul>
                     </div>
                 </li>
+
                 @endguest
                 <li class="{{Request::path()==='quizzes'? 'active':''}}">
                     <a href="/quizzes">
@@ -80,11 +81,11 @@
         <!-- Logo -->
         <div id="logo">
             <h1>
-                <a href="#">
+                <a href="/home">
                     Loki
                 </a>
             </h1>
-            <span class="tag">
+            <span class="tagg">
                 Train your brain
             </span>
         </div>

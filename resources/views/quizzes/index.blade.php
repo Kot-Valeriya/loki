@@ -50,7 +50,7 @@
                         <br/>
                         <ul class="tags">
                         @foreach($quiz->tags as $tag)
-                         <li><a href="#" class="tag">{{$tag->name}}</a></li>
+                         <li><a href="{{route('tags.show',['tag'=>$tag])}}" class="tag">{{$tag->name}}</a></li>
 
                         @endforeach
                     </ul>

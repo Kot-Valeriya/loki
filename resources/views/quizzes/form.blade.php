@@ -6,6 +6,7 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('css/util.css') }}"/>
   <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css?v=').time() }}"/>
   <script src="{{asset('js/create-new-question.js?v=').time()}}"></script>
+   <script src="{{asset('js/main.js?v=').time()}}"></script>
   <link rel="stylesheet" type="text/css" href="{{ asset('css/checkboxes-style.css?v=').time() }}"/>
 
 @endsection

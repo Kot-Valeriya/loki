@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\QuizRequest;
 use App\Http\Requests\QuizUpdateRequest;
 use App\Models\Quiz;
+use App\Models\Tag;
 use App\models\User;
 use App\Traits\SetValues;
 use Illuminate\Http\Request;
@@ -66,6 +67,9 @@ class QuizController extends Controller {
 
 			$user = Auth::user();
 			$user->quizzes()->save($quiz);
+
+			$tags = Tag::where('name', request('tags'))->pluck('id');
+			$quiz->tags()->attach($tags);
 
 			$this->createNewQuestion($request, $quiz);
 

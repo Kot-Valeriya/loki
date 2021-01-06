@@ -5,6 +5,7 @@ return [
 	'title' => 'TITLE',
 	'description' => 'DESCRIPTION',
 	'numberOfQuestions' => 'NUMBER OF QUESTIONS',
+	'tags' => 'TAGS',
 	'question' => 'QUESTION',
 	'correctAnswer' => 'CORRECT ANSWER',
 	'wrongAnswer' => 'WRONG ANSWER',

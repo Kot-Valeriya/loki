@@ -1,8 +1,31 @@
 
 (function ($) {
     "use strict";
+     
+    $(document).ready(function(){
+     $('#tag_name').keyup(function(){ 
+        var query = $(this).val();
+        if(query != '')
+        {
+         var _token = $('input[name="_token"]').val();
+         $.ajax({
+          url:"/tags/getTags",
+          method:"POST",
+          data:{query:query, _token:_token},
+          success:function(data){
+           $('#tagList').fadeIn();  
+                    $('#tagList').html(data);
+          }
+         });
+        }
+    });
 
-
+    $(document).on('click', 'li', function(){  
+        $('#tag_name').val($(this).text());  
+        $('#tagList').fadeOut();  
+    });
+});
+  
     /*==================================================================
     [ Focus Contact2 ]*/
     $('.input2').each(function(){
@@ -53,6 +76,7 @@
            hideValidate(this);
        });
     });
+
 
     function showValidate(input) {
         var thisAlert = $(input).parent();

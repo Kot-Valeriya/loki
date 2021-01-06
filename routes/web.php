@@ -67,6 +67,9 @@ Route::middleware('auth')->group(function () {
 		->name('users.update');
 });
 
+Route::get('/tags/{tag}', 'TagController@show')->name('tags.show');
+Route::post('/tags/getTags/', 'TagController@getTags')->name('tags.getTags');
+
 Route::get('/quizzes', 'QuizController@index')->name('quizzes.index');
 Route::post('/quizzes/{quiz}/result', 'HandleResultController')
 	->name('quizzes.result');
@@ -81,7 +84,6 @@ Route::get('/users/{user}/quizzes', 'QuizController@list')
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/lang/{locale}', 'HomeController@lang')->name('language.set');
 Route::get('/about', 'HomeController@about')->name('about');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

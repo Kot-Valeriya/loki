@@ -20,11 +20,11 @@ class QuestionController extends Controller {
 		//
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
+	/**u
+		 * Show the form for creating a new resource.
+		 *
+		 * @return \Illuminate\Http\Response
+	*/
 	public function create() {
 
 		$quiz = request()->session()->get('quiz'); //, Quiz::find(\DB::getPdo()->lastInsertId()));

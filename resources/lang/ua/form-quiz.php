@@ -4,6 +4,7 @@ return [
 	'newQuiz' => 'Нова вікторина',
 	'title' => 'НАЗВА ВІКТОРИНИ',
 	'description' => 'ОПИС',
+	'tags' => 'ТЕГИ',
 	'numberOfQuestions' => 'КІЛЬКІСТЬ ПИТАНЬ',
 	'question' => 'ЗАПИТАННЯ',
 	'correctAnswer' => 'ПРАВИЛЬНА ВІДПОВІДЬ',

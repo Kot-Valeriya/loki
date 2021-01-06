@@ -5,6 +5,7 @@ return [
 	'title' => 'НАЗВАНИЕ',
 	'description' => 'ОПИСАНИЕ',
 	'numberOfQuestions' => 'КОЛИЧЕСТВО ВОПРОСОВ',
+	'tags'=>'ТЕГИ'
 	'question' => 'ВОПРОС',
 	'rightAnswer' => 'ПРАВИЛЬНЫЙ ОТВЕТ',
 	'wrongAnswer' => 'НЕПРАВИЛЬНЫЙ ВАРИАНТ ОТВЕТА',
