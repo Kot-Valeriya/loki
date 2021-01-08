@@ -21,11 +21,10 @@
     });
 
     $(document).on('click', 'li', function(){  
-        $('#tag_name').val($(this).text());  
+        $('#tag_name').val($(this).text());
         $('#tagList').fadeOut();  
     });
 });
-  
     /*==================================================================
     [ Focus Contact2 ]*/
     $('.input2').each(function(){

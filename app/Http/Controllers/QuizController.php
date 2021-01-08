@@ -55,7 +55,6 @@ class QuizController extends Controller {
 	public function store(QuizRequest $request) {
 
 		if (!$request->session()->exists('remainingQuestions')) {
-
 			//\DB::beginTransaction();
 
 			$quiz = Quiz::create([
@@ -68,7 +67,7 @@ class QuizController extends Controller {
 			$user = Auth::user();
 			$user->quizzes()->save($quiz);
 
-			$tags = Tag::where('name', request('tags'))->pluck('id');
+			$tags = Tag::firstOrCreate(['name' => request('tags')]);
 			$quiz->tags()->attach($tags);
 
 			$this->createNewQuestion($request, $quiz);

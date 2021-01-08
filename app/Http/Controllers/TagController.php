@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -23,10 +24,11 @@ class TagController extends Controller {
 	}
 
 	/*
-		*
-		*AJAX request
-		*
+		     *
+		     *AJAX request
+		     *
 	*/
+
 	public function getTags(Request $request) {
 
 		$query = $request->get('query');
@@ -45,5 +47,21 @@ class TagController extends Controller {
 		}
 		$output .= '</ul>';
 		echo $output;
-	}
+	} /*
+	    public function getTags(Request $request) {
+	    $term = trim($request->q);
+
+	    if (empty($term)) {
+	    return \Response::json([]);
+	    }
+
+	    $tags = Tag::search($term)->limit(5)->get();
+
+	    $formatted_tags = [];
+
+	    foreach ($tags as $tag) {
+	    $formatted_tags[] = ['id' => $tag->id, 'text' => $tag->name];
+	    }
+
+*/
 }

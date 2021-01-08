@@ -26,18 +26,18 @@ method="POST">
     </div>
 
     <div class="wrap-input2">
-      <input class="input2"
+        <input class="input2"
         name="tags"
         type="text" id="tag_name"
         value="{{old('tags')}}"/>
-        <span
+            <span
             class="focus-input2
             @error('tags') danger @enderror"
             data-placeholder="{{ $errors->has('tags')? $errors->first('tags'):
             __('form-quiz.tags')}}">
-        </span>
+            </span>
+        <div id="tagList">
     </div>
-    <div id="tagList">
     </div>
 
     <div class="wrap-input2 validate-input" data-validate="Number is required">
